@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+# 数据库连接配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://106.15.251.188:3306/notice?serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: zjh@26108
+  mvc:
+    static-path-pattern: /**
+
+# MyBatis配置
+mybatis:
+  configuration:
+    #开启驼峰命名匹配映射
+    map-underscore-to-camel-case: true
+  #配置MyBatis的xml映射文件路径
+  mapper-locations: classpath:mapper/*.xml
+  #配置XML映射文件中指定的实体类别名路径
+  type-aliases-package: com.zjh.notice.model
+
+# 配置日志
+logging:
+  level:
+    com.zjh.book.mapper : debug
