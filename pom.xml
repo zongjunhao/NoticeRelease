@@ -69,6 +69,12 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
+            <version>4.13</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

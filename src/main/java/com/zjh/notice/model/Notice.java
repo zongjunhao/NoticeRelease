@@ -88,4 +88,17 @@ public class Notice {
     this.noticeUpdatetime = noticeUpdatetime;
   }
 
+  @Override
+  public String toString() {
+    return "Notice{" +
+            "noticeId=" + noticeId +
+            ", noticeTitle='" + noticeTitle + '\'' +
+            ", noticeContent='" + noticeContent + '\'' +
+            ", noticeUnitId=" + noticeUnitId +
+            ", noticeLevel=" + noticeLevel +
+            ", noticeEndtime=" + noticeEndtime +
+            ", noticeAddtime=" + noticeAddtime +
+            ", noticeUpdatetime=" + noticeUpdatetime +
+            '}';
+  }
 }

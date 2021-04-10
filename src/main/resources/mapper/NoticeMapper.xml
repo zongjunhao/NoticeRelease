@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjh.notice.mapper.NoticeMapper">
+    <!--<select id="findNoticeByUser" resultType="com.zjh.notice.model.Notice">-->
+    <!--    select *-->
+    <!--    from notice-->
+    <!--    where notice_id in (-->
+    <!--    select r_notice_id-->
+    <!--    from r_notice_user-->
+    <!--    where r_user_id = #{userId}-->
+    <!--    <if test='isFinished!=99'>-->
+    <!--        and r_is_finished = #{isFinished}-->
+    <!--    </if>)-->
+    <!--    <if test='level!=99'>-->
+    <!--        and notice_level = #{level}-->
+    <!--    </if>-->
+    <!--</select>-->
+    <select id="findNoticeByUser" resultType="com.zjh.notice.model.Notice">
+        select *
+        from notice
+        where notice_unit_id in (select r_unit_id from r_user_unit where r_user_id = #{userId})
+    </select>
+</mapper>

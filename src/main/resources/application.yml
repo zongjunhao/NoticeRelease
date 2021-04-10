@@ -25,3 +25,9 @@ mybatis:
 logging:
   level:
     com.zjh.book.mapper : debug
+    com:
+      dy:
+        springboot:
+          server:
+            mapper : debug
+

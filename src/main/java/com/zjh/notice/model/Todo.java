@@ -112,4 +112,20 @@ public class Todo {
     this.todoUpdatetime = todoUpdatetime;
   }
 
+
+  @Override
+  public String toString() {
+    return "Todo{" +
+            "todoId=" + todoId +
+            ", todoTitle='" + todoTitle + '\'' +
+            ", todoContent='" + todoContent + '\'' +
+            ", todoLevel=" + todoLevel +
+            ", todoIsFinished=" + todoIsFinished +
+            ", todoUserId=" + todoUserId +
+            ", todoEndtime=" + todoEndtime +
+            ", todoFinishtime=" + todoFinishtime +
+            ", todoAddtime=" + todoAddtime +
+            ", todoUpdatetime=" + todoUpdatetime +
+            '}';
+  }
 }
