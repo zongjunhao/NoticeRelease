@@ -97,4 +97,19 @@ public class RNoticeUser {
     this.rUpdatetime = rUpdatetime;
   }
 
+
+  @Override
+  public String toString() {
+    return "RNoticeUser{" +
+            "rNoticeUserId=" + rNoticeUserId +
+            ", rNoticeId=" + rNoticeId +
+            ", rUserId=" + rUserId +
+            ", rIsReaded=" + rIsReaded +
+            ", rReadtime=" + rReadtime +
+            ", rIsFinished=" + rIsFinished +
+            ", rFinishtime=" + rFinishtime +
+            ", rAddtime=" + rAddtime +
+            ", rUpdatetime=" + rUpdatetime +
+            '}';
+  }
 }

@@ -2,14 +2,14 @@ package com.zjh.notice;
 
 import com.zjh.notice.mapper.NoticeMapper;
 import com.zjh.notice.mapper.TodoMapper;
-import com.zjh.notice.model.Notice;
-import com.zjh.notice.model.Todo;
+import com.zjh.notice.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -26,10 +26,50 @@ class NoticeApplicationTests {
     }
 
     @Test
+    public void findNoticeUser(){
+        RNoticeUser rNoticeUser = noticeMapper.findNoticeUser(1, "1");
+        System.out.println("rNoticeUser = " + rNoticeUser);
+    }
+
+    @Test
+    public void findTodosByCondition(){
+        List<Todo> todos = todoMapper.findExpiredTodos("1", 99);
+        for (Todo todo: todos){
+            System.out.println(todo);
+        }
+    }
+
+    @Test
+    public void addReadRecord(){
+        int result = noticeMapper.addReadRecord("3", "1");
+        System.out.println("result = " + result);
+    }
+
+    @Test
+    public void finishTodo(){
+        todoMapper.finishTodo("1");
+    }
+
+    @Test
     public void findNoticeTest() {
-        List<Notice> notices = noticeMapper.findNoticeByUser("1");
+        List<Notice> notices = noticeMapper.findNoticesByUser("1", 0);
         for (Notice notice : notices) {
             System.out.println(notice);
         }
+        List<NoticeData> noticeDataList = getNoticeDetails(notices, "1");
+        for (NoticeData noticeData : noticeDataList) {
+            System.out.println(noticeData);
+        }
+    }
+
+    private List<NoticeData> getNoticeDetails(List<Notice> notices, String userId) {
+        List<NoticeData> noticeDataList = new ArrayList<>();
+        for (Notice notice : notices) {
+            List<String> labels = noticeMapper.findLabelsByNotice(notice.getNoticeId());
+            RNoticeUser rNoticeUser = noticeMapper.findNoticeUser(notice.getNoticeId(), userId);
+            NoticeData noticeData = new NoticeData(notice, labels, rNoticeUser);
+            noticeDataList.add(noticeData);
+        }
+        return noticeDataList;
     }
 }

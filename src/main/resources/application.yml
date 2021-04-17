@@ -10,6 +10,10 @@ spring:
     password: zjh@26108
   mvc:
     static-path-pattern: /**
+  # 配置jackson向前端返回的时间数据格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 # MyBatis配置
 mybatis:

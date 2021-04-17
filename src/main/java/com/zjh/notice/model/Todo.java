@@ -17,7 +17,6 @@ public class Todo {
   private long todoUserId;
   @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private java.sql.Timestamp todoEndtime;
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private java.sql.Timestamp todoFinishtime;
   private java.sql.Timestamp todoAddtime;
   private java.sql.Timestamp todoUpdatetime;

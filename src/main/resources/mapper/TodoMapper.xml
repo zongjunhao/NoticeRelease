@@ -11,6 +11,16 @@
         <if test='level!=99'>
             and todo_level = #{level}
         </if>
-        ORDER BY todo_endtime DESC
+        and todo_endtime > now()
+        ORDER BY todo_endtime
+    </select>
+    <select id="findExpiredTodos" resultType="com.zjh.notice.model.Todo">
+        select *
+        from todo where todo_user_id = #{userId}
+        <if test='level!=99'>
+            and todo_level = #{level}
+        </if>
+        and todo_endtime &lt; now()
+        ORDER BY todo_endtime
     </select>
 </mapper>

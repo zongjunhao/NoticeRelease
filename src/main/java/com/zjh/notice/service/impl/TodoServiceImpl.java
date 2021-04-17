@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class TodoServiceImpl implements TodoService {
-    private final static Logger logger = LoggerFactory.getLogger(IndexServiceImpl.class);
+    private final static Logger logger = LoggerFactory.getLogger(TodoServiceImpl.class);
     private final TodoMapper todoMapper;
 
     public TodoServiceImpl(TodoMapper todoMapper) {
@@ -66,7 +66,7 @@ public class TodoServiceImpl implements TodoService {
         ResponseData response = new ResponseData();
         try {
             Timestamp date = new Timestamp(System.currentTimeMillis());
-            int result = todoMapper.finishTodo(todoId, date);
+            int result = todoMapper.finishTodo(todoId);
             if (result == 1) {
                 response.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);
             } else {

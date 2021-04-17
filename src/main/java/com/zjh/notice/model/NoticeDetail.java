@@ -1,23 +1,23 @@
 package com.zjh.notice.model;
 
-
 import java.util.List;
 
 /**
- * 通知数据，包含通知的标签信息
- *
  * @author zongjunhao
  */
-@SuppressWarnings("unused")
-public class NoticeData {
+public class NoticeDetail {
     private Notice notice;
     private List<String> labels;
+    private List<File> files;
+    private String unitName;
     private RNoticeUser rNoticeUser;
     private long isFinished;
 
-    public NoticeData(Notice notice, List<String> labels, RNoticeUser rNoticeUser) {
+    public NoticeDetail(Notice notice, List<String> labels, List<File> files, String unitName, RNoticeUser rNoticeUser) {
         this.notice = notice;
         this.labels = labels;
+        this.files = files;
+        this.unitName = unitName;
         this.rNoticeUser = rNoticeUser;
         if (rNoticeUser == null) {
             this.isFinished = 0;
@@ -42,12 +42,20 @@ public class NoticeData {
         this.labels = labels;
     }
 
-    public long getIsFinished() {
-        return isFinished;
+    public List<File> getFiles() {
+        return files;
     }
 
-    public void setIsFinished(long isFinished) {
-        this.isFinished = isFinished;
+    public void setFiles(List<File> files) {
+        this.files = files;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
     }
 
     public RNoticeUser getrNoticeUser() {
@@ -58,11 +66,21 @@ public class NoticeData {
         this.rNoticeUser = rNoticeUser;
     }
 
+    public long getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(long isFinished) {
+        this.isFinished = isFinished;
+    }
+
     @Override
     public String toString() {
-        return "NoticeData{" +
+        return "NoticeDetail{" +
                 "notice=" + notice +
                 ", labels=" + labels +
+                ", files=" + files +
+                ", unitName='" + unitName + '\'' +
                 ", rNoticeUser=" + rNoticeUser +
                 ", isFinished=" + isFinished +
                 '}';

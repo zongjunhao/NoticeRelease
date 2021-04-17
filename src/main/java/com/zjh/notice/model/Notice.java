@@ -1,6 +1,8 @@
 package com.zjh.notice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author zongjunhao
  */
@@ -12,6 +14,7 @@ public class Notice {
   private String noticeContent;
   private long noticeUnitId;
   private long noticeLevel;
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   private java.sql.Timestamp noticeEndtime;
   private java.sql.Timestamp noticeAddtime;
   private java.sql.Timestamp noticeUpdatetime;

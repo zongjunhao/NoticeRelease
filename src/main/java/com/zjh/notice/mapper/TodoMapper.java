@@ -25,6 +25,15 @@ public interface TodoMapper {
     List<Todo> findTodosByCondition(String userId, int isFinished, int level);
 
     /**
+     * 查看已过期待办
+     *
+     * @param userId 用户ID
+     * @param level  待办级别
+     * @return 待办事项列表
+     */
+    List<Todo> findExpiredTodos(String userId, int level);
+
+    /**
      * 添加一条todo记录
      *
      * @param title        标题
@@ -44,8 +53,8 @@ public interface TodoMapper {
      * @param date   当前时间
      * @return 是否更新成功
      */
-    @Update("update todo set todo_is_finished = 1 , todo_finishtime = #{date} where todo_id = #{todoId} ")
-    int finishTodo(String todoId, Timestamp date);
+    @Update("update todo set todo_is_finished = 1 , todo_finishtime = now() where todo_id = #{todoId} ")
+    int finishTodo(String todoId);
 
     /**
      * 修改一条todo记录
