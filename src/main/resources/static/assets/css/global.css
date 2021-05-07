@@ -1,0 +1,45 @@
+.welcome-text
+{
+    display: inline-block;
+    padding: 30px 20px;
+    color: #777;
+    line-height: 20px;
+}
+#side-nav li a i
+{
+	display:inline-block;
+	width:18px;
+}
+
+select {
+ 	 border: solid 1px #000;
+	 background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+	 padding-right: 14px;
+	  
+}
+
+select::-ms-expand { display: none; }
+
+#my_table_first,#my_table_previous,#my_table_next,#my_table_last,.paginate_button
+{
+	cursor:pointer;
+}
+
+#my_table_info
+{
+	float:right;
+}
+
+#my_table_paginate
+{
+    float: left;
+}
+
+#projectHanding_wrapper
+{
+	display:none;
+}
+.formore{
+	color:#5bc0de;
+	font-size:12px;
+}

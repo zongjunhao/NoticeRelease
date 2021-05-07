@@ -108,4 +108,32 @@ public class NoticeServiceImpl implements NoticeService {
         }
         return noticeDataList;
     }
+
+    @Override
+    public ResponseData getUnits(String userId) {
+        ResponseData response = new ResponseData();
+        try {
+            List<Unit> unitList = noticeMapper.getUnits(userId);
+            response.setData(unitList);
+            response.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
+        } catch (Exception e) {
+            logger.error("get units error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseData getLabels() {
+        ResponseData response = new ResponseData();
+        try {
+            List<Label> labelList = noticeMapper.getLabels();
+            response.setData(labelList);
+            response.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
+        } catch (Exception e) {
+            logger.error("get labels error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
+    }
 }

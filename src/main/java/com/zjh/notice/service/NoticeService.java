@@ -37,4 +37,19 @@ public interface NoticeService {
      * @return 是否修改成功
      */
     ResponseData finishNotice(String userId, String noticeId);
+
+    /**
+     * 获取当前用户具有通知发布权限的单位
+     *
+     * @param userId 用户ID
+     * @return 单位列表
+     */
+    ResponseData getUnits(String userId);
+
+    /**
+     * 获取所有标签
+     *
+     * @return 标签列表
+     */
+    ResponseData getLabels();
 }

@@ -34,4 +34,18 @@ public class NoticeController {
         response = noticeService.readNotice(userId, noticeId);
         return response;
     }
+
+    @RequestMapping("getUnits")
+    public ResponseData getUnits(String userId){
+        ResponseData response;
+        response = noticeService.getUnits(userId);
+        return response;
+    }
+
+    @RequestMapping("getLabels")
+    public ResponseData getLabels(){
+        ResponseData response;
+        response = noticeService.getLabels();
+        return response;
+    }
 }

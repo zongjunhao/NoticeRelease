@@ -1,9 +1,6 @@
 package com.zjh.notice.mapper;
 
-import com.zjh.notice.model.File;
-import com.zjh.notice.model.Label;
-import com.zjh.notice.model.Notice;
-import com.zjh.notice.model.RNoticeUser;
+import com.zjh.notice.model.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -115,4 +112,13 @@ public interface NoticeMapper {
      */
     @Select("select unit_name from unit where unit_id = #{unitId} ")
     String getUnitName(long unitId);
+
+    /**
+     * 获取当前用户具有通知发布权限的单位
+     *
+     * @param userId 用户ID
+     * @return 单位列表
+     */
+    @Select("select * from unit where unit_id in (select r_unit_id from r_user_unit where r_user_id = #{userId}  and r_role <> 3)")
+    List<Unit> getUnits(String userId);
 }

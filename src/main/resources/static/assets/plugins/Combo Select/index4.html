@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>jQuery可搜索下拉框插件Combo Select演示-回调函数_dowebok</title>
+<link rel="stylesheet" href="css/combo.select.css">
+<style>
+.dowebok { width: 400px; margin: 100px auto 0;}
+.result { text-align: center; color: #f50;}
+</style>
+</head>
+
+<body>
+<h1>回调函数</h1>
+
+<div class="dowebok">
+	<select>
+		<option value="">城市</option>
+
+		<optgroup label="广东省">
+			<option value="深圳">深圳</option>
+			<option value="广州">广州</option>
+			<option value="珠海">珠海</option>
+			<option value="惠州">惠州</option>
+		</optgroup>
+
+		<optgroup label="湖南省">
+			<option value="长沙">长沙</option>
+			<option value="株洲">株洲</option>
+			<option value="岳阳">岳阳</option>
+			<option value="张家界">张家界</option>
+		</optgroup>
+
+		<optgroup label="江西省">
+			<option value="南昌">南昌</option>
+			<option value="赣州">赣州</option>
+			<option value="宜春">宜春</option>
+			<option value="九江">九江</option>
+		</optgroup>
+	</select>
+</div>
+
+<p class="result">&nbsp;</p>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.combo.select.js"></script>
+<script>
+$(function() {
+	$('select').comboSelect();
+
+	$('select').change(function(e, v) {
+		$('.result').html('你选择了第' + e.target.selectedIndex + '项，值是' + e.target.value);
+	});
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- 以下信息与演示无关，可不必理会 -->
+<style>
+body { margin: 0; border-left: 200px solid #ccc;}
+
+h1 { width: 1000px; margin: 40px auto; font: 32px "Microsoft Yahei"; text-align: center;}
+
+.menu { position: absolute; left: 0; top: 0; bottom: 0; width: 200px; padding-top: 100px; font-family: Consolas,arial,"宋体"; background-color: #ccc;}
+.menu a { display: block; height: 40px; margin: 0 0 1px 2px; padding-left: 10px; line-height: 40px; font-size: 14px; color: #333; text-decoration: none;}
+.menu a:hover { background-color: #eee;}
+.menu .cur { color: #000; background-color: #fff !important;}
+
+.vad { margin: 300px 0 10px; font-family: Consolas,arial,宋体,sans-serif; text-align:center;}
+.vad a { display: inline-block; height: 36px; line-height: 36px; margin: 0 5px; padding: 0 50px; font-size: 14px; text-align:center; color:#eee; text-decoration: none; background-color: #222;}
+.vad a:hover { color: #fff; background-color: #000;}
+.thead { width: 728px; height: 90px; margin: 0 auto; border-bottom: 40px solid transparent;}
+</style>
+
+<p class="vad">
+	<a href="http://www.dowebok.com/" target="_blank">dowebok.com</a>
+	<a href="http://www.dowebok.com/179.html" target="_blank">说 明</a>
+	<a href="http://www.dowebok.com/179.html" target="_blank">下 载</a>
+</p>
+
+<div class="menu">
+	<a href="index.html">1、默认</a>
+	<a href="index2.html">2、分组</a>
+	<a href="index3.html">3、默认选中/禁用</a>
+	<a class="cur" href="index4.html">4、回调函数</a>
+	<a href="index5.html">5、展开/收起</a>
+</div>
+
+</body>
+</html>

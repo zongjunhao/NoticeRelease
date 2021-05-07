@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+.auth-box 
+{
+	height: 520px;
+}
+
+.navbar-btn
+{
+	margin-bottom:0px;
+	padding:0px;
+}
+
+c .content
+{
+	vertical-align:baseline;
+}
+
+.left .content
+{
+	margin-top:-60px;
+}
+
+.auth-box .header
+{
+	margin-bottom:5px;
+}
+.lead
+{
+	margin-bottom:5px;
+}
+#msgInfo
+{
+	margin-top:10px;
+	height:20px;
+	color:red;
+	font-size:14px;
+	padding-right:2%;
+	vertical-align:text-bottom;
+}
+i.lnr.lnr-arrow-left-circle
+{
+	position:relative;
+	top:30px;
+	left:10px;
+	
+}
+
+
+

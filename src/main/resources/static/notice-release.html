@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>校园通知发布系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="assets/plugins/bootstrap-select-1.13.0-dev/dist/css/bootstrap-select.css">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
+    <link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
+    <link rel="stylesheet" href="assets/plugins/DataTables/css/jquery.dataTables.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png">
+    <!--layer css-->
+    <link rel="stylesheet" href="assets/plugins/layer/layui.css">
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand" style="padding: 13px 39px;">
+            <a href="index.html"><img src="./assets/img/logo.png" alt="Klorofil Logo"
+                                      class="img-responsive logo" style="width: 57px;display: inline;">
+                <span style="display: inline;margin-left: 16px;font-size: 20px;font-weight: bold;">校园通知发布系统</span></a>
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+            <div class="navbar-left">
+                <span class="welcome-text" id="welcome-text">欢迎您，xxx</span>
+            </div>
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="javascript:exit();"> <span>退出</span> <i class="fa fa-sign-out"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav id="sidebar-holder">
+                <!-- 侧边栏在此 -->
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content" id="contain-holder">
+            <!-- 内容区在此 -->
+
+            <div id="contain-loader">
+                <link rel="stylesheet" href="assets/plugins/webuploader-0.1.5/webuploader.css">
+                <link rel="stylesheet" href="assets/css/upload.css">
+                <link rel="stylesheet" href="assets/plugins/datepicker/css/bootstrap-datepicker3.min.css">
+
+                <style>
+                    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+                        width: 302px;
+                    }
+
+                    .webuploader-pick {
+                        background-color: #5cb85c;
+                        border-color: #4cae4c;
+                        color: #FFF;
+                    }
+
+                    .webuploader-pick-hover {
+                        background-color: #47a447;
+                        border-color: #398439;
+                    }
+
+                    .attribute_name {
+                        font-weight: 700;
+                        padding-right: 15px;
+                        padding-left: 5px;
+                        color: #666666;
+                        width: 12%;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                </style>
+
+                <div class="container-fluid">
+                    <!-- OVERVIEW -->
+                    <div class="panel panel-headline">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">发布通知</h3>
+                        </div>
+
+                        <div class="panel-body" style="position:relative;left:10px;">
+                            <div class="form-horizontal">
+                                <!--					通知单位-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>通</div>
+                                        <div>知</div>
+                                        <div>发</div>
+                                        <div>布</div>
+                                        <div>单</div>
+                                        <div>位:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <select class="selectpicker" data-live-search="true" data-size="8"
+                                                style="width:37%;border-color:#d8d5d5;color: #999999;height: 100%;font-size: 14px;"
+                                                id="unit">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--					通知标题-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>通</div>
+                                        <div>知</div>
+                                        <div>标</div>
+                                        <div>题:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <input type="text" class="form-control" id="title" required="required"
+                                               onblur="test('title')">
+                                        <div id="msgInfo_title" class="warning_info"></div>
+                                    </div>
+                                </div>
+
+                                <!--					通知内容-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>通</div>
+                                        <div>知</div>
+                                        <div>内</div>
+                                        <div>容:</div>
+                                    </div>
+                                    <div class="attribute_content">
+							            <textarea cols="60" rows="10" id="content"
+                                                  style="resize:none;width:50%;border-color:#d8d5d5;" name="content"
+                                                  maxlength="1000"
+                                                  onblur="test('content')"
+                                                  class="form-control"></textarea>
+                                        <div id="msgInfo_content" class="warning_info"></div>
+                                    </div>
+
+                                </div>
+
+                                <!--					通知级别-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>通</div>
+                                        <div>知</div>
+                                        <div>级</div>
+                                        <div>别:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <select class="selectpicker" id="level">
+                                            <option value="3">一般</option>
+                                            <option value="2">重要</option>
+                                            <option value="1">紧急</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--					截止时间-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>截</div>
+                                        <div>止</div>
+                                        <div>日</div>
+                                        <div>期:</div>
+                                    </div>
+                                    <div id="data-picker">
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-addon"><i
+                                                    class="glyphicon glyphicon-th"></i> </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--					通知标签-->
+                                <div class="form-group form_cell">
+                                    <span class="required" style="visibility: hidden !important;">*</span>
+                                    <div class="attribute_name">
+                                        <div>通</div>
+                                        <div>知</div>
+                                        <div>标</div>
+                                        <div>签:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <label><input type='checkbox' name='check'/>学校通知</label>
+                                        &nbsp;
+                                        <label><input type='checkbox' name='check'/>学院通知</label>
+                                        &nbsp;
+                                        <label><input type='checkbox' name='check'/>课程</label>
+                                        &nbsp;
+                                        <label><input type='checkbox' name='check'/>活动</label>
+                                        &nbsp;
+                                        <label><input type='checkbox' name='check'/>比赛</label>
+                                    </div>
+                                </div>
+
+                                <!--					附件-->
+                                <div class="form-group form_cell file">
+                                    <span class="required" style="visibility: hidden !important;">*</span>
+                                    <div class="attribute_name" style="padding-top: 4px;">
+                                        <div>上</div>
+                                        <div>传</div>
+                                        <div>附</div>
+                                        <div>件:</div>
+                                    </div>
+                                    <div class="attribute_content_file">
+                                        <div id="uploader" class="wu-example" style="padding: 0;">
+                                            <!--用来存放文件信息-->
+                                            <div id="uploader_file">
+                                            </div>
+                                            <div class="btns">
+                                                <div id="picker">选择文件</div>
+                                                <button type="button" id="ctlBtn" class="btn btn-primary"
+                                                        style="height: 33px;margin-left: 20px">开始上传
+                                                </button>
+                                            </div>
+                                            <span style="display:none" id="paper_file_loaction"></span>
+                                        </div>
+                                        <div class="panel-subtitle" style="padding-top: 0;">
+                                            上传文件类型限制为：jpg,png,pdf,doc,docx,zip,rar。单个文件最大容量是：100M
+                                        </div>
+                                        <button class="btn btn-primary submit" type="button" onclick="submit()">提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OVERVIEW -->
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy; 2021 校园通知发布系统</p>
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<table id="projectHanding" style="display:none"></table>
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-select-1.13.0-dev/dist/js/bootstrap-select.js"></script>
+<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/plugins/DataTables/js/jquery.dataTables.js"></script>
+<script src="assets/plugins/assets/scripts/klorofil-common.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/cookie/jquery.cookie.js"></script>
+<script src="js/global.js"></script>
+<div id="js-holder">
+    <!-- js区在此 -->
+
+    <div id="js-loader">
+        <script src="assets/plugins/webuploader-0.1.5/webuploader.js"></script>
+        <script type="text/javascript" src="js/notice-release.js"></script>
+        <script type="text/javascript" src="assets/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="assets/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"
+                charset="UTF-8"></script>
+        <script type="text/javascript">
+            $('#data-picker input').datepicker({
+                language: 'zh-CN',
+                format: 'yyyy-mm-dd',//日期格式
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>
