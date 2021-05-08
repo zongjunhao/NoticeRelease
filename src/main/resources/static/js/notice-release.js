@@ -1,5 +1,7 @@
 let base_url = "http://localhost:8080"
 let file_ids = []
+//更新用户名
+$('#welcome-text').html('欢迎您，' + $.cookie('userName'));
 
 showUnit();
 showLabels();
@@ -13,7 +15,7 @@ function showUnit() {
         type: "POST",
         url: "/notice/getUnits",
         data: {
-            userId: 1
+            userId: $.cookie('userId')
         },
         success: function (json) {
             if (json.code === "2006") {

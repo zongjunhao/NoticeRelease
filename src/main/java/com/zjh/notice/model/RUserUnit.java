@@ -57,4 +57,14 @@ public class RUserUnit {
     this.rUpdatetime = rUpdatetime;
   }
 
+  @Override
+  public String toString() {
+    return "RUserUnit{" +
+            "rUserUnitId=" + rUserUnitId +
+            ", rUserId=" + rUserId +
+            ", rUnitId=" + rUnitId +
+            ", rAddtime=" + rAddtime +
+            ", rUpdatetime=" + rUpdatetime +
+            '}';
+  }
 }

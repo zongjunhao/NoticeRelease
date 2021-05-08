@@ -3,10 +3,14 @@ package com.zjh.notice;
 import com.zjh.notice.kit.Utils;
 import com.zjh.notice.mapper.NoticeMapper;
 import com.zjh.notice.mapper.TodoMapper;
+import com.zjh.notice.mapper.UserMapper;
 import com.zjh.notice.model.*;
 import com.zjh.notice.service.NoticeService;
+import com.zjh.notice.service.impl.IndexServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,18 +23,31 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class NoticeApplicationTests {
-
     @Autowired
     TodoMapper todoMapper;
     @Autowired
     NoticeMapper noticeMapper;
     @Autowired
     NoticeService noticeService;
+    @Autowired
+    UserMapper userMapper;
 
     @Test
     void contextLoads() {
     }
-    
+
+    @Test
+    public void findUserByRole() {
+        List<RUserUnit> userList = userMapper.findUserByRole(2);
+        if (userList.isEmpty()) {
+            System.out.println("列表为空");
+        } else {
+            for (RUserUnit user : userList) {
+                System.out.println(user.toString());
+            }
+        }
+    }
+
     @Test
     public void addNotice() {
         String endTime = "2021-5-8";
@@ -40,27 +57,27 @@ class NoticeApplicationTests {
     }
 
     @Test
-    public void findNoticeUser(){
+    public void findNoticeUser() {
         RNoticeUser rNoticeUser = noticeMapper.findNoticeUser(1, "1");
         System.out.println("rNoticeUser = " + rNoticeUser);
     }
 
     @Test
-    public void findTodosByCondition(){
+    public void findTodosByCondition() {
         List<Todo> todos = todoMapper.findExpiredTodos("1", 99);
-        for (Todo todo: todos){
+        for (Todo todo : todos) {
             System.out.println(todo);
         }
     }
 
     @Test
-    public void addReadRecord(){
+    public void addReadRecord() {
         int result = noticeMapper.addReadRecord("3", "1");
         System.out.println("result = " + result);
     }
 
     @Test
-    public void finishTodo(){
+    public void finishTodo() {
         todoMapper.finishTodo("1");
     }
 

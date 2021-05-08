@@ -1,10 +1,13 @@
 package com.zjh.notice.mapper;
 
+import com.zjh.notice.model.RUserUnit;
 import com.zjh.notice.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author zongjunhao
@@ -20,6 +23,11 @@ public interface UserMapper {
     @Select("select * from user where user_account = #{account} and user_password = #{password}")
     User findByAccount(String account, String password);
 
-    // @Insert("insert into user")
-    // int addUser(User user);
+    /**
+     * 查询用户是否具有发布权限
+     * @param userId 用户ID
+     * @return 具有通知发布权限的记录
+     */
+    @Select("select * from r_user_unit where r_user_id = #{userId} and r_role <> 3")
+    List<RUserUnit> findUserByRole(long userId);
 }

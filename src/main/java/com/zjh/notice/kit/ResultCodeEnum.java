@@ -40,7 +40,8 @@ public enum ResultCodeEnum {
     NO_ENOUGH_MES("4003", "登录失败_账号或密码为空"),
     LOGOUT_SUCCESS("4004", "退出登录成功"),
     NO_LOGIN_USER("4005", "退出登录失败_用户未登录"),
-    LOGIN_INFO_EXPIRED("4006", "登录信息过期");
+    LOGIN_INFO_EXPIRED("4006", "登录信息过期"),
+    LOGIN_SUCCESS_WITH_NO_GRANT("4007", "无通知发布权限");
 
     private final String code;
     private final String desc;

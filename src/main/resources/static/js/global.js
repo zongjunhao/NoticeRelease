@@ -329,44 +329,15 @@ function page(type) {
     }
 }
 
-function projectDetail(pid, oId) {
-    $.cookie("ZUEL_proid", "");
-    $.cookie("ZUEL_proid", pid);
-    $.cookie("ZUEL_oprtid", oId);
-    $.cookie('ctype', 'project_View');
-    //alert(pid);
-    //alert($.cookie("ZUEL_proid"));
-
-
-    $("title").html("电子采购系统 - 项目详情");
-    $.ajax({
-        url: baseurl + '/projectView.html',
-        type: "post",
-        success: function (info) {
-            $("#contain-holder").html($(info).filter("#contain-loader").html());
-            //加载js区
-            $("#js-holder").html($(info).filter("#js-loader").html());
-        },
-        error: function () {
-            layer.msg('请刷新重试');
-        }
-    });
-}
 function exit() {
 
     layer.confirm("是否确认退出", {
         btn: ['确认退出', '取消'] //按钮
     },
         function () {
-            $.cookie('ZUEL_oprtid', '', { expires: -1 }); // 删除 cookie
-            $.cookie('ZUEL_proid', '', { expires: -1 }); // 删除 cookie
-            $.cookie('ZUEL_proidsta', '', { expires: -1 }); // 删除 cookie
-            $.cookie('ZUEL_prostep', '', { expires: -1 }); // 删除 cookie
-            $.cookie('ZUEL_uid', '', { expires: -1 }); // 删除 cookie
-            $.cookie('ZUEL_uname', '', { expires: -1 }); // 删除 cookie
-            $.cookie('ctype', '', { expires: -1 }); // 删除 cookie
-            $.cookie('utype', '', { expires: -1 }); // 删除 cookie
-            window.location.href = "/profession/user/logout";
+            $.cookie('userId', '', { expires: -1 }); // 删除 cookie
+            $.cookie('userName', '', { expires: -1 }); // 删除 cookie
+            window.location.href = "/page-login.html";
             // $.ajax({
             //     type: "POST",
             //     url: "/profession/user/logout",

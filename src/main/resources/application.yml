@@ -32,7 +32,7 @@ mybatis:
 # 配置日志
 logging:
   level:
-    com.zjh.book.mapper: debug
+    com.zjh.notice.mapper: debug
     com:
       dy:
         springboot:
