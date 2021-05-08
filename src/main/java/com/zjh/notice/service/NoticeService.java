@@ -52,4 +52,18 @@ public interface NoticeService {
      * @return 标签列表
      */
     ResponseData getLabels();
+
+    /**
+     * 添加通知
+     *
+     * @param unitId  单位ID
+     * @param title   通知标题
+     * @param content 通知内容
+     * @param level   重要等级
+     * @param endTime 截止时间
+     * @param labels  标签ID
+     * @return 是否添加成功
+     */
+    ResponseData addNotice(long unitId, String title, String content, long level, String endTime, String[] labels);
+
 }

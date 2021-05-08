@@ -7,9 +7,6 @@ var baseurl = "/profession/views/pages";
 //更新用户名
 $('#welcome-text').html('欢迎您，' + $.cookie('ZUEL_uname'));
 
-// 获取用户单位信息
-getUserUnit();
-
 //加载侧边栏
 switch ($.cookie('utype')) {
     case "administrator":
@@ -397,125 +394,6 @@ function exit() {
         }, function () {
 
         });
-}
-
-$('#projectHanding').DataTable({
-    "destroy": true,
-    "ordering": true,
-    "serverSide": true,
-    "order":[ [3,'desc'] ],
-    "searching": false,
-    "pagingType": "full_numbers",
-    "sPaginationType": "full_numbers",
-
-    "oLanguage": {
-        "sLengthMenu": "显示 _MENU_ 每页",
-        "sZeroRecords": "抱歉， 没有找到",
-        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-        "sInfoEmpty": "没有数据",
-        "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
-        "sZeroRecords": "没有检索到数据",
-        "sSearch": "搜索:  ",
-        "oPaginate": {
-            "sFirst": "首页",
-            "sPrevious": "上页",
-            "sNext": "下页",
-            "sLast": "末页"
-        }
-    },
-
-    "sAjaxSource": "/profession/project/getPros",//显示待解决项目列表
-    "aoColumns": [
-        {
-            "data": null,
-            "asSorting": ["asc"]
-        },
-        {
-            "data": 'columns.p_name'
-        },
-        {
-            "data": 'columns.p_unitname'
-        },
-        {
-            "data": 'columns.p_createtime',
-        },
-        {
-            "data": 'columns.p_username'
-        },
-        {
-            "data": 'columns.p_contact'
-        },
-        {
-            "data": 'columns.p_type'
-        },
-        {
-            "data": 'columns.p_state'
-        },
-    ],
-    "fnServerData": function (sSource, aoData, fnCallback) {
-        $.ajax(
-            {
-                "type": 'post',
-                "url": sSource,
-                "dataType": "json",
-                "data":
-                {
-                    aoData: JSON.stringify(aoData),
-                },
-                "success": function (resp) {
-                	if(resp.resultCode=='40000'){
-                		top.location.href='/';
-                	}
-                    if (resp.iTotalRecords != 0) {
-                        $('#num').html(resp.iTotalRecords);
-                        $("#num").attr("style", "padding-left: 10px;padding-right: 10px;background-color: #f83400;margin-left: 10px;border-radius: 3px;");
-                    }
-                    fnCallback(resp);
-                },
-                "error": function () {
-                }
-            });
-        //获得未受理项目列表
-        $.ajax(
-            {
-                "type": 'post',
-                "url": "/profession/project/getUnassignedPros",
-                "dataType": "json",
-                "data":
-                {
-                    aoData: JSON.stringify(aoData),
-                },
-                "success": function (resp) {
-                    if (resp.iTotalRecords) {
-                        let data = resp.aaData;
-                        let waiting = 0;
-                        for (let i = 0, len = data.length; i < len; i++) {
-                            if (data[i].columns.p_state == 0) waiting++;
-                        }
-                        if (waiting) {
-                            $('#num1').html(waiting);
-                            $("#num1").attr("style", "padding-left: 10px;padding-right: 10px;background-color: #f83400;margin-left: 10px;border-radius: 3px;");
-                        }
-                    }
-                    fnCallback(resp);
-                },
-                "error": function () {
-                }
-            });
-    },
-});
-
-function getUserUnit() {
-    $.ajax({
-        type: "POST",
-        url : "/profession/user/getUserUnit",
-        success : function(result) {
-            if (result.resultCode === "10001"){
-                $.cookie("ZUEL_unit_id", result.data.unId);
-                $.cookie("ZUEL_unit_name", result.data.unName);
-            }
-        }
-    })
 }
 
 //我在这里定义了存储所有流程信息的变量

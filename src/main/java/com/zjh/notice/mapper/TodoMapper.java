@@ -50,7 +50,6 @@ public interface TodoMapper {
      * 完成一条Todo
      *
      * @param todoId TodoID
-     * @param date   当前时间
      * @return 是否更新成功
      */
     @Update("update todo set todo_is_finished = 1 , todo_finishtime = now() where todo_id = #{todoId} ")

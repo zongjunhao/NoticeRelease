@@ -1,14 +1,18 @@
 package com.zjh.notice;
 
+import com.zjh.notice.kit.Utils;
 import com.zjh.notice.mapper.NoticeMapper;
 import com.zjh.notice.mapper.TodoMapper;
 import com.zjh.notice.model.*;
+import com.zjh.notice.service.NoticeService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +24,18 @@ class NoticeApplicationTests {
     TodoMapper todoMapper;
     @Autowired
     NoticeMapper noticeMapper;
+    @Autowired
+    NoticeService noticeService;
 
     @Test
     void contextLoads() {
+    }
+    
+    @Test
+    public void addNotice() {
+        String endTime = "2021-5-8";
+        String[] labelIds = {"1", "2", "3"};
+        noticeService.addNotice(1, "插入测试标题2", "插入测试内容2", 2, endTime, labelIds);
     }
 
     @Test

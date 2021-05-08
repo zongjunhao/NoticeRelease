@@ -2,6 +2,7 @@ package com.zjh.notice.service.impl;
 
 import com.zjh.notice.kit.ResponseData;
 import com.zjh.notice.kit.ResultCodeEnum;
+import com.zjh.notice.kit.Utils;
 import com.zjh.notice.mapper.NoticeMapper;
 import com.zjh.notice.mapper.TodoMapper;
 import com.zjh.notice.model.*;
@@ -9,7 +10,11 @@ import com.zjh.notice.service.NoticeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +24,11 @@ import java.util.List;
 @Service
 public class NoticeServiceImpl implements NoticeService {
     private final static Logger logger = LoggerFactory.getLogger(NoticeServiceImpl.class);
+    private final PlatformTransactionManager transactionManager;
     private final NoticeMapper noticeMapper;
 
-    public NoticeServiceImpl(NoticeMapper noticeMapper) {
+    public NoticeServiceImpl(PlatformTransactionManager transactionManager, NoticeMapper noticeMapper) {
+        this.transactionManager = transactionManager;
         this.noticeMapper = noticeMapper;
     }
 
@@ -134,6 +141,35 @@ public class NoticeServiceImpl implements NoticeService {
             logger.error("get labels error", e);
             response.setResult(ResultCodeEnum.SERVER_ERROR);
         }
+        return response;
+    }
+
+    @Override
+    public ResponseData addNotice(long unitId, String title, String content, long level, String endTime, String[] labelIds) {
+        // 创建事务
+        TransactionStatus txStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
+        ResponseData response = new ResponseData();
+        try {
+            Timestamp endTimestamp = Utils.strToTimestamp(endTime);
+            Notice notice = new Notice(title, content, unitId, level, endTimestamp);
+            int result = noticeMapper.addNotice(notice);
+            if (result != 1) {
+                response.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
+                return response;
+            }
+            long noticeId = notice.getNoticeId();
+            for (String labelId : labelIds) {
+                noticeMapper.addNoticeLabel(noticeId, labelId);
+            }
+            response.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);
+        } catch (Exception e) {
+            // 异常回滚
+            transactionManager.rollback(txStatus);
+            logger.error("add notice error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        // 提交事务
+        transactionManager.commit(txStatus);
         return response;
     }
 }

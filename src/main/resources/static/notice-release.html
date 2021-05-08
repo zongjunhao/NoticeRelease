@@ -213,15 +213,16 @@
                                         <div>签:</div>
                                     </div>
                                     <div class="attribute_content">
-                                        <label><input type='checkbox' name='check'/>学校通知</label>
-                                        &nbsp;
-                                        <label><input type='checkbox' name='check'/>学院通知</label>
-                                        &nbsp;
-                                        <label><input type='checkbox' name='check'/>课程</label>
-                                        &nbsp;
-                                        <label><input type='checkbox' name='check'/>活动</label>
-                                        &nbsp;
-                                        <label><input type='checkbox' name='check'/>比赛</label>
+                                        <div id="label"></div>
+<!--                                        <label><input type='checkbox' name='check' id="1"/>学校通知</label>-->
+<!--                                        &nbsp;-->
+<!--                                        <label><input type='checkbox' name='check' id="2"/>学院通知</label>-->
+<!--                                        &nbsp;-->
+<!--                                        <label><input type='checkbox' name='check' id="3"/>课程</label>-->
+<!--                                        &nbsp;-->
+<!--                                        <label><input type='checkbox' name='check' id="4"/>活动</label>-->
+<!--                                        &nbsp;-->
+<!--                                        <label><input type='checkbox' name='check' id="5"/>比赛</label>-->
                                     </div>
                                 </div>
 
@@ -304,6 +305,7 @@
                 language: 'zh-CN',
                 format: 'yyyy-mm-dd',//日期格式
             });
+            $('#data-picker input').datepicker( 'setDate' , new Date());
         </script>
     </div>
 </div>

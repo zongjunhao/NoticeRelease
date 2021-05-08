@@ -3,8 +3,10 @@ package com.zjh.notice.mapper;
 import com.zjh.notice.model.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -121,4 +123,24 @@ public interface NoticeMapper {
      */
     @Select("select * from unit where unit_id in (select r_unit_id from r_user_unit where r_user_id = #{userId}  and r_role <> 3)")
     List<Unit> getUnits(String userId);
+
+    /**
+     * 添加一条通知
+     *
+     * @param notice 通知内容
+     * @return 是否插入成功
+     */
+    @Options(useGeneratedKeys = true, keyProperty = "noticeId", keyColumn = "noticeId")
+    @Insert("insert into notice(notice_title, notice_content, notice_unit_id, notice_level, notice_endtime) values (#{noticeTitle}, #{noticeContent}, #{noticeUnitId}, #{noticeLevel}, #{noticeEndtime})")
+    int addNotice(Notice notice);
+
+    /**
+     * 添加通知标签
+     *
+     * @param noticeId 通知ID
+     * @param labelId  标签ID
+     * @return 是否添加成功
+     */
+    @Insert("insert into r_notice_label(r_notice_id, r_label_id) values(#{noticeId}, #{labelId})")
+    int addNoticeLabel(long noticeId, String labelId);
 }
