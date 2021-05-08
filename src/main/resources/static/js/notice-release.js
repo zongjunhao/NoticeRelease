@@ -1,4 +1,5 @@
 let base_url = "http://localhost:8080"
+let file_ids = []
 
 showUnit();
 showLabels();
@@ -73,11 +74,11 @@ function showReception() {
         //     });
         // },
         success: function (jsonobj) {
-            if (jsonobj.resultCode == "50000") {
+            if (jsonobj.code == "50000") {
                 //这里设置项目受理人
                 $("#reception").append(jsonobj.data[0].columns.ur_name);
             } else {
-                layer.msg(jsonobj.resultDesc + "!", {
+                layer.msg(jsonobj.desc + "!", {
                     time: 1000
                 });
             }
@@ -133,58 +134,31 @@ function submit() {
         let index = layer.load(1, {
             shade: [0.5, '#fff'], //0.1透明度的白色背景
         });
-        var data = {
-            unit: $.cookie("ZUEL_unit_id"),//这里是项目申请单位，需要根据传来的数据决定
-            name: $("#name").val(),
-            applicant: $("#applicant_name").val(),
-            phone: $("#applicant_phone").val(),
-            landline: $("#landline").val(),
-            contact: $("#contact").val(),
-            mobile: $("#mobile").val(),
-            contactLandline: $("#contactLandline").val(),
-            budget: $("#budget").val(),
-            time: $("#time").val(),
-            place: $("#place").val(),
+        let data = {
+            unitId: $("#unit").val(),
+            title: $("#title").val(),
             content: $("#content").val(),
-            explain: $("#explain").val(),
-            fid: $("#paper_file_loaction").text()
+            level: $("#level").val(),
+            endtime: $('#data-picker input').val(),
+            labels: getLabels().join(','),
+            fileIds: file_ids.join(',')
         };
         $.ajax({
-            url: "/profession/wkflow/addPro",//申请项目
+            url: "/notice/addNotice",
             data: data,
             async: true,
             type: "POST",
             // contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function (re) {
-                if (re.resultCode == "50000") {
+                if (re.code === "2002") {
                     layer.close(index)
-                    layer.msg('项目提交成功，等待受理', {
+                    layer.msg('通知发布成功', {
                         time: 2000
                     });
 
-                    setTimeout(function () {
-                        //加载查看项目页面
-                        $("title").html("采招业务流系统 - 查看项目");
-                        $.ajax({
-                            url: baseurl + '/projectManagement.html',
-                            type: "post",
-                            success: function (info) {
-                                //加载内容区
-                                $("#contain-holder").html($(info).filter("#contain-loader").html());
-                                //加载js区
-                                $("#js-holder").html($(info).filter("#js-loader").html());
-                                //控制侧边栏active样式
-                                $("#side-nav li a").removeClass("active");
-                                $("#side-nav li").eq(1).find("a").eq(2).addClass("active");
-                                $.cookie('ctype', 'project_Management');
-                            },
-                            error: function () {
-                                layer.msg('请刷新重试');
-                            }
-                        });
-                    }, 2100);
+
                 } else {
-                    layer.msg(re.resultDesc, {
+                    layer.msg(re.desc, {
                         time: 1000
                     });
                 }
@@ -255,7 +229,7 @@ function upload_file() {
 
     // 点击开始上传
     $("#ctlBtn").on('click', function () {
-        uploader_file.options.formData.guid = Math.random(); // 随机数生成文件唯一标识，合并时通过此标识区分文件
+        uploader_file.options.formData.guid = Math.random(); // 随机数生成文件唯一标识
         uploader_file.upload();
     });
 
@@ -273,36 +247,23 @@ function upload_file() {
     });
 
     // 文件成功、失败处理
-    // uploader_file.on('uploadSuccess', function (file, response) {
-    //     if (response.resultCode != null && response.resultCode == "50000") {
-    //         $('#' + file.id).find('p.state').text('上传成功');
-    //         $.post(
-    //             '/profession/project/mergeFile',
-    //             {
-    //                 "guid": uploader_file.options.formData.guid,// 文件唯一标识
-    //                 chunks: Math.ceil(file.size / (10 * 1024 * 1024)),// 根据文件大小计算出文件片数
-    //                 fileName: file.name,// 文件名，后端合并文件时使用
-    //                 //projectID: $.cookie("ZUEL_proid") // 此处修改为项目的ID  由于是刚申请的项目没有项目ID，暂时改成了传项目名称
-    //                 projectName: $("#name").val()
-    //             },
-    //             function (data) {
-    //                 $("#paper_file_loaction").text(data.data.fid);
-    //                 $('#' + file.id).find('.delete_this_upload').remove();
-    //             },
-    //             "json"
-    //         );
-    //
-    //     } else {
-    //         if (response.resultDesc == null) {
-    //             $('#' + file.id).find('p.state').text("未知服务器错误，上传失败");
-    //         } else {
-    //             $('#' + file.id).find('p.state').text(response.resultDesc);
-    //         }
-    //         $('#' + file.id).find('p.state').addClass("text-danger");
-    //         $('#' + file.id).find('.delete_this_upload').remove();
-    //     }
-    //     $('#' + file.id).find('a.webuploadDelbtn').remove();
-    // });
+    uploader_file.on('uploadSuccess', function (file, response) {
+        if (response.code != null && response.code === "2011") {
+            $('#' + file.id).find('p.state').text('上传成功');
+            $('#' + file.id).find('.delete_this_upload').remove();
+            file_ids.push(response.data)
+            console.log(file_ids)
+        } else {
+            if (response.desc == null) {
+                $('#' + file.id).find('p.state').text("未知服务器错误，上传失败");
+            } else {
+                $('#' + file.id).find('p.state').text(response.desc);
+            }
+            $('#' + file.id).find('p.state').addClass("text-danger");
+            $('#' + file.id).find('.delete_this_upload').remove();
+        }
+        $('#' + file.id).find('a.webuploadDelbtn').remove();
+    });
 
     // 上传错误
     uploader_file.on('uploadError', function (file) {

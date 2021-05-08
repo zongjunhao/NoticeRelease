@@ -25,6 +25,8 @@ public enum ResultCodeEnum {
     DB_WRONG_NULL_WRONG_PARA("2008", "该次查询结果为空_输入参数错误"),
     DB_DELETE_SUCCESS("2009", "数据删除成功"),
     DB_DELETE_FAILURE("2010", "数据删除失败"),
+    FILE_UPLOAD_SUCCESS("2011", "文件上传成功"),
+    FILE_UPLOAD_FAILURE("2012", "文件上传失败"),
 
     PARA_FORMAT_ERROR("3000", "请求的参数格式错误"),
     PARA_NUM_ERROR("3001", "请求的参数个数错误"),

@@ -145,7 +145,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public ResponseData addNotice(long unitId, String title, String content, long level, String endTime, String[] labelIds) {
+    public ResponseData addNotice(long unitId, String title, String content, long level, String endTime, String[] labelIds, String[] fileIds) {
         // 创建事务
         TransactionStatus txStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
         ResponseData response = new ResponseData();
@@ -161,6 +161,9 @@ public class NoticeServiceImpl implements NoticeService {
             for (String labelId : labelIds) {
                 noticeMapper.addNoticeLabel(noticeId, labelId);
             }
+            for (String fileId: fileIds){
+                noticeMapper.updateFile(noticeId, fileId);
+            }
             response.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);
         } catch (Exception e) {
             // 异常回滚
@@ -170,6 +173,26 @@ public class NoticeServiceImpl implements NoticeService {
         }
         // 提交事务
         transactionManager.commit(txStatus);
+        return response;
+    }
+
+    @Override
+    public ResponseData addFile(String fileName, String filePath) {
+        ResponseData response = new ResponseData();
+        try {
+            File file = new File(fileName, filePath);
+            int result = noticeMapper.addNewFile(file);
+            if (result == 1) {
+                long fileId = file.getFileId();
+                response.setData(fileId);
+                response.setResult(ResultCodeEnum.FILE_UPLOAD_SUCCESS);
+            } else {
+                response.setResult(ResultCodeEnum.FILE_UPLOAD_FAILURE);
+            }
+        } catch (Exception e) {
+            logger.error("add file error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
         return response;
     }
 }

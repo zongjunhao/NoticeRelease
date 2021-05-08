@@ -62,8 +62,17 @@ public interface NoticeService {
      * @param level   重要等级
      * @param endTime 截止时间
      * @param labels  标签ID
+     * @param fileIds 附件ID
      * @return 是否添加成功
      */
-    ResponseData addNotice(long unitId, String title, String content, long level, String endTime, String[] labels);
+    ResponseData addNotice(long unitId, String title, String content, long level, String endTime, String[] labels, String[] fileIds);
 
+    /**
+     * 添加附件
+     *
+     * @param fileName 附件名
+     * @param filePath 附件路径
+     * @return 是否添加成功
+     */
+    ResponseData addFile(String fileName, String filePath);
 }

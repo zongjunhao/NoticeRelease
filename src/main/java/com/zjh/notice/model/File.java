@@ -6,76 +6,80 @@ package com.zjh.notice.model;
 @SuppressWarnings("unused")
 public class File {
 
-  private long fileId;
-  private long fileNoticeId;
-  private String fileName;
-  private String filePath;
-  private java.sql.Timestamp fileAddtime;
-  private java.sql.Timestamp fileUpdatetime;
+    private long fileId;
+    private long fileNoticeId;
+    private String fileName;
+    private String filePath;
+    private java.sql.Timestamp fileAddtime;
+    private java.sql.Timestamp fileUpdatetime;
+
+    public File(String fileName, String filePath) {
+        this.fileName = fileName;
+        this.filePath = filePath;
+    }
+
+    public long getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(long fileId) {
+        this.fileId = fileId;
+    }
 
 
-  public long getFileId() {
-    return fileId;
-  }
+    public long getFileNoticeId() {
+        return fileNoticeId;
+    }
 
-  public void setFileId(long fileId) {
-    this.fileId = fileId;
-  }
-
-
-  public long getFileNoticeId() {
-    return fileNoticeId;
-  }
-
-  public void setFileNoticeId(long fileNoticeId) {
-    this.fileNoticeId = fileNoticeId;
-  }
+    public void setFileNoticeId(long fileNoticeId) {
+        this.fileNoticeId = fileNoticeId;
+    }
 
 
-  public String getFileName() {
-    return fileName;
-  }
+    public String getFileName() {
+        return fileName;
+    }
 
-  public void setFileName(String fileName) {
-    this.fileName = fileName;
-  }
-
-
-  public String getFilePath() {
-    return filePath;
-  }
-
-  public void setFilePath(String filePath) {
-    this.filePath = filePath;
-  }
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
 
-  public java.sql.Timestamp getFileAddtime() {
-    return fileAddtime;
-  }
+    public String getFilePath() {
+        return filePath;
+    }
 
-  public void setFileAddtime(java.sql.Timestamp fileAddtime) {
-    this.fileAddtime = fileAddtime;
-  }
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
 
-  public java.sql.Timestamp getFileUpdatetime() {
-    return fileUpdatetime;
-  }
+    public java.sql.Timestamp getFileAddtime() {
+        return fileAddtime;
+    }
 
-  public void setFileUpdatetime(java.sql.Timestamp fileUpdatetime) {
-    this.fileUpdatetime = fileUpdatetime;
-  }
+    public void setFileAddtime(java.sql.Timestamp fileAddtime) {
+        this.fileAddtime = fileAddtime;
+    }
 
-  @Override
-  public String toString() {
-    return "File{" +
-            "fileId=" + fileId +
-            ", fileNoticeId=" + fileNoticeId +
-            ", fileName='" + fileName + '\'' +
-            ", filePath='" + filePath + '\'' +
-            ", fileAddtime=" + fileAddtime +
-            ", fileUpdatetime=" + fileUpdatetime +
-            '}';
-  }
+
+    public java.sql.Timestamp getFileUpdatetime() {
+        return fileUpdatetime;
+    }
+
+    public void setFileUpdatetime(java.sql.Timestamp fileUpdatetime) {
+        this.fileUpdatetime = fileUpdatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "fileId=" + fileId +
+                ", fileNoticeId=" + fileNoticeId +
+                ", fileName='" + fileName + '\'' +
+                ", filePath='" + filePath + '\'' +
+                ", fileAddtime=" + fileAddtime +
+                ", fileUpdatetime=" + fileUpdatetime +
+                '}';
+    }
 }

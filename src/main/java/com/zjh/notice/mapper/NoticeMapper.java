@@ -1,10 +1,7 @@
 package com.zjh.notice.mapper;
 
 import com.zjh.notice.model.*;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -143,4 +140,24 @@ public interface NoticeMapper {
      */
     @Insert("insert into r_notice_label(r_notice_id, r_label_id) values(#{noticeId}, #{labelId})")
     int addNoticeLabel(long noticeId, String labelId);
+
+    /**
+     * 添加附件
+     *
+     * @param file 文件内容
+     * @return 是否添加成功
+     */
+    @Options(useGeneratedKeys = true, keyProperty = "fileId", keyColumn = "fileId")
+    @Insert("insert into file(file_name, file_path) values (#{fileName}, #{filePath})")
+    int addNewFile(File file);
+
+    /**
+     * 将附件添加到指定通知之下
+     *
+     * @param noticeId 通知ID
+     * @param fileId   文件ID
+     * @return 是否更新成功
+     */
+    @Update("update file set file_notice_id = #{noticeId} where file_id = #{fileId}")
+    int updateFile(long noticeId, String fileId);
 }

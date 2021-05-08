@@ -35,7 +35,8 @@ class NoticeApplicationTests {
     public void addNotice() {
         String endTime = "2021-5-8";
         String[] labelIds = {"1", "2", "3"};
-        noticeService.addNotice(1, "插入测试标题2", "插入测试内容2", 2, endTime, labelIds);
+        String[] fileIds = {"1", "2", "3"};
+        noticeService.addNotice(1, "插入测试标题2", "插入测试内容2", 2, endTime, labelIds, fileIds);
     }
 
     @Test
