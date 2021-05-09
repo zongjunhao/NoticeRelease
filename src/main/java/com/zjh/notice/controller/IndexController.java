@@ -42,6 +42,20 @@ public class IndexController {
         return response;
     }
 
+    @RequestMapping("getUser")
+    public ResponseData getUser(String userId){
+        ResponseData response;
+        response = indexService.getUser(userId);
+        return response;
+    }
+
+    @RequestMapping("updateUserInfo")
+    public ResponseData updateUserInfo(String field, String value, String userId){
+        ResponseData response;
+        response = indexService.updateUserInfo(field, value, userId);
+        return response;
+    }
+
     @RequestMapping("createUnit")
     public ResponseData createUnit(String name, String describe, Integer leaderId,  String[] userIds){
         ResponseData response = new ResponseData();

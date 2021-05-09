@@ -37,6 +37,10 @@ class NoticeApplicationTests {
     }
 
     @Test
+    public void updateUser(){
+        userMapper.updateUserInfo("user_email", "1016767058@qq.com", "1");
+    }
+    @Test
     public void findUserByRole() {
         List<RUserUnit> userList = userMapper.findUserByRole(2);
         if (userList.isEmpty()) {

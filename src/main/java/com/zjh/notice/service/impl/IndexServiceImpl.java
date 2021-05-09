@@ -49,4 +49,39 @@ public class IndexServiceImpl implements IndexService {
         }
         return response;
     }
+
+    @Override
+    public ResponseData getUser(String userId) {
+        ResponseData response = new ResponseData();
+        try {
+            User user = userMapper.getUser(userId);
+            if (user == null) {
+                response.setResult(ResultCodeEnum.DB_FIND_FAILURE);
+            } else {
+                response.setData(user);
+                response.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
+            }
+        } catch (Exception e) {
+            logger.error("get user error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseData updateUserInfo(String field, String value, String userId) {
+        ResponseData response = new ResponseData();
+        try {
+            int result = userMapper.updateUserInfo(field, value, userId);
+            if (result == 0) {
+                response.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
+            } else {
+                response.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);
+            }
+        } catch (Exception e) {
+            logger.error("update user info error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
+    }
 }
