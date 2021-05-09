@@ -1,9 +1,11 @@
 package com.zjh.notice.service.impl;
 
+import com.zjh.notice.kit.Constant;
 import com.zjh.notice.kit.ResponseData;
 import com.zjh.notice.kit.ResultCodeEnum;
 import com.zjh.notice.kit.Utils;
 import com.zjh.notice.mapper.TodoMapper;
+import com.zjh.notice.model.Notice;
 import com.zjh.notice.model.Todo;
 import com.zjh.notice.service.TodoService;
 import org.slf4j.Logger;
@@ -29,11 +31,34 @@ public class TodoServiceImpl implements TodoService {
     public ResponseData getTodos(String userId, int isFinished, int level) {
         ResponseData response = new ResponseData();
         try {
-            List<Todo> todos = todoMapper.findTodosByCondition(userId, isFinished, level);
+            List<Todo> todos;
+            if (isFinished == Constant.FINISH_EXPIRED) {
+                todos = todoMapper.findExpiredTodos(userId, level);
+            } else {
+                todos = todoMapper.findTodosByCondition(userId, isFinished, level);
+            }
             if (todos.isEmpty()) {
                 response.setResult(ResultCodeEnum.DB_FIND_FAILURE);
             } else {
                 response.setData(todos);
+                response.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
+            }
+        } catch (Exception e) {
+            logger.error("get todos error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseData getTodo(String todoId) {
+        ResponseData response = new ResponseData();
+        try {
+            Todo todo = todoMapper.getTodo(todoId);
+            if (todo == null) {
+                response.setResult(ResultCodeEnum.DB_FIND_FAILURE);
+            } else {
+                response.setData(todo);
                 response.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
             }
         } catch (Exception e) {

@@ -26,6 +26,9 @@ public class NoticeDetail {
         }
     }
 
+    public NoticeDetail() {
+    }
+
     public Notice getNotice() {
         return notice;
     }

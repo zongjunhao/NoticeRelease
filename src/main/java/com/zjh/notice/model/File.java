@@ -18,6 +18,9 @@ public class File {
         this.filePath = filePath;
     }
 
+    public File() {
+    }
+
     public long getFileId() {
         return fileId;
     }

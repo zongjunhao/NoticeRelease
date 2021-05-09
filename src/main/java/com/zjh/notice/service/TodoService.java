@@ -1,6 +1,8 @@
 package com.zjh.notice.service;
 
 import com.zjh.notice.kit.ResponseData;
+import com.zjh.notice.model.Todo;
+import org.apache.ibatis.annotations.Select;
 
 import java.sql.Timestamp;
 
@@ -17,6 +19,13 @@ public interface TodoService {
      * @return 待办事项列表
      */
     ResponseData getTodos(String userId, int isFinished, int level);
+
+    /**
+     * 查询单条TODO
+     * @param todoId TodoID
+     * @return Todo信息
+     */
+    ResponseData getTodo(String todoId);
 
     /**
      * 添加todo

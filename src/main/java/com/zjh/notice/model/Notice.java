@@ -29,6 +29,9 @@ public class Notice {
         this.noticeEndtime = noticeEndtime;
     }
 
+    public Notice() {
+    }
+
     public long getNoticeId() {
         return noticeId;
     }

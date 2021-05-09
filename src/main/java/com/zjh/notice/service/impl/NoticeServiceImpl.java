@@ -1,5 +1,6 @@
 package com.zjh.notice.service.impl;
 
+import com.zjh.notice.kit.Constant;
 import com.zjh.notice.kit.ResponseData;
 import com.zjh.notice.kit.ResultCodeEnum;
 import com.zjh.notice.kit.Utils;
@@ -38,16 +39,20 @@ public class NoticeServiceImpl implements NoticeService {
         try {
             List<Notice> notices = null;
             switch (isFinished) {
-                case 0:
+                case Constant.FINISH_UNFINISHED:
+                    logger.info("isFinished = 0");
                     notices = noticeMapper.findUnfinishedNotices(userId, level);
                     break;
-                case 1:
+                case Constant.FINISH_FINISHED:
+                    logger.info("isFinished = 1");
                     notices = noticeMapper.findFinishedNotices(userId, level);
                     break;
-                case 2:
+                case Constant.FINISH_ALL:
+                    logger.info("isFinished = 2");
                     notices = noticeMapper.findNoticesByUser(userId, level);
                     break;
-                case 3:
+                case Constant.FINISH_EXPIRED:
+                    logger.info("isFinished = 3");
                     notices = noticeMapper.findExpiredNotices(userId, level);
                 default:
             }
@@ -96,7 +101,19 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public ResponseData finishNotice(String userId, String noticeId) {
-        return null;
+        ResponseData response = new ResponseData();
+        try {
+            int result = noticeMapper.finishNotice(userId, noticeId);
+            if (result == 1) {
+                response.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);
+            } else {
+                response.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
+            }
+        } catch (Exception e) {
+            logger.error("finish notice error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
     }
 
     /**
@@ -161,7 +178,7 @@ public class NoticeServiceImpl implements NoticeService {
             for (String labelId : labelIds) {
                 noticeMapper.addNoticeLabel(noticeId, labelId);
             }
-            for (String fileId: fileIds){
+            for (String fileId : fileIds) {
                 noticeMapper.updateFile(noticeId, fileId);
             }
             response.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);

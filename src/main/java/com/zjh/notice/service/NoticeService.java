@@ -1,10 +1,6 @@
 package com.zjh.notice.service;
 
 import com.zjh.notice.kit.ResponseData;
-import com.zjh.notice.model.Notice;
-import com.zjh.notice.model.NoticeData;
-
-import java.util.List;
 
 /**
  * @author zongjunhao

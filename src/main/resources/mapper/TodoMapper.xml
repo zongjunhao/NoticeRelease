@@ -5,10 +5,10 @@
     <select id="findTodosByCondition" resultType="com.zjh.notice.model.Todo">
         select *
         from todo where todo_user_id = #{userId}
-        <if test='isFinished!=99'>
+        <if test='isFinished!=2'>
             and todo_is_finished = #{isFinished}
         </if>
-        <if test='level!=99'>
+        <if test='level!=0'>
             and todo_level = #{level}
         </if>
         and todo_endtime > now()
@@ -17,7 +17,7 @@
     <select id="findExpiredTodos" resultType="com.zjh.notice.model.Todo">
         select *
         from todo where todo_user_id = #{userId}
-        <if test='level!=99'>
+        <if test='level!=0'>
             and todo_level = #{level}
         </if>
         and todo_endtime &lt; now()

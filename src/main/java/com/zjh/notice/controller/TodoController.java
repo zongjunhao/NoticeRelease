@@ -27,6 +27,13 @@ public class TodoController {
         return response;
     }
 
+    @RequestMapping("getTodo")
+    public ResponseData getTodo(String todoId){
+        ResponseData response;
+        response = todoService.getTodo(todoId);
+        return response;
+    }
+
     @RequestMapping("addTodo")
     public ResponseData addTodo(String title, String content, int level, String endTime, String userId) {
         ResponseData response;

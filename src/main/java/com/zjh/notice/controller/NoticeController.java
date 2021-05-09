@@ -33,9 +33,9 @@ public class NoticeController {
     }
 
     @RequestMapping("getNotices")
-    public ResponseData getNotices(String userId, int isFinished, int level) {
+    public ResponseData getNotices(String userId, int level, int isFinished) {
         ResponseData response;
-        response = noticeService.getNoticesByConditions(userId, isFinished, level);
+        response = noticeService.getNoticesByConditions(userId, level, isFinished);
         return response;
     }
 
@@ -43,6 +43,13 @@ public class NoticeController {
     public ResponseData readNotice(String userId, String noticeId) {
         ResponseData response;
         response = noticeService.readNotice(userId, noticeId);
+        return response;
+    }
+
+    @RequestMapping("finishNotice")
+    public ResponseData finishNotice(String userId, String noticeId) {
+        ResponseData response;
+        response = noticeService.finishNotice(userId, noticeId);
         return response;
     }
 
@@ -61,7 +68,7 @@ public class NoticeController {
     }
 
     @RequestMapping("addNotice")
-    public ResponseData addNotice(long unitId, String title, String content, long level, String endtime, String labels, String fileIds){
+    public ResponseData addNotice(long unitId, String title, String content, long level, String endtime, String labels, String fileIds) {
         ResponseData response;
         response = noticeService.addNotice(unitId, title, content, level, endtime, labels.split(","), fileIds.split(","));
         return response;
@@ -90,7 +97,7 @@ public class NoticeController {
             response.setResult(ResultCodeEnum.FILE_UPLOAD_FAILURE);
             return response;
         }
-        response = noticeService.addFile(newFileName, dirPath + newFileName);
+        response = noticeService.addFile(originalFileName, "/upload/" + newFileName);
         return response;
     }
 }

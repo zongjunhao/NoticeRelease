@@ -3,7 +3,6 @@ package com.zjh.notice.mapper;
 import com.zjh.notice.model.*;
 import org.apache.ibatis.annotations.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -74,6 +73,16 @@ public interface NoticeMapper {
      */
     @Select("select * from file where file_notice_id = #{noticeId} ")
     List<File> findFilesByNotice(long noticeId);
+
+    /**
+     * 完成通知
+     *
+     * @param userId   用户ID
+     * @param noticeId 通知ID
+     * @return 是否更新成功
+     */
+    @Update("update r_notice_user set r_is_finished = 1, r_finishtime = now() where r_user_id = #{userId} and r_notice_id = #{noticeId}")
+    int finishNotice(String userId, String noticeId);
 
     /**
      * 查找通知用户对应记录

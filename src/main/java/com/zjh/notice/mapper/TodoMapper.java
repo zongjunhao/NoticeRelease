@@ -34,6 +34,14 @@ public interface TodoMapper {
     List<Todo> findExpiredTodos(String userId, int level);
 
     /**
+     * 查询单条TODO
+     * @param todoId TodoID
+     * @return Todo信息
+     */
+    @Select("select * from todo where todo_id = #{todoId} ")
+    Todo getTodo(String todoId);
+
+    /**
      * 添加一条todo记录
      *
      * @param title        标题
