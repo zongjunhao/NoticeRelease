@@ -37,8 +37,8 @@ function login(){
                 if (res.code === "4000") {
                     $.cookie("userId", res.data.userId)
                     $.cookie("userName", res.data.userName)
-                    location.href = "/notice-release.html"
-                } else if (res.data.code === "4007"){ // 登陆成功，无通知发布权限
+                    location.href = "/user.html"
+                } else if (res.code === "4007"){ // 登陆成功，无通知发布权限
                     layer.msg("当前用户无通知发布权限")
                 } else {
                     layer.msg("登陆失败，请检查账号密码是否正确")

@@ -79,6 +79,23 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
+    public ResponseData getRole(long userId) {
+        ResponseData response = new ResponseData();
+        try {
+            List<RUserUnit> rUserUnit = userMapper.findChargeUnits(userId);
+            if (rUserUnit.isEmpty()) {
+                response.setResult(ResultCodeEnum.DB_FIND_FAILURE);
+            } else {
+                response.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
+            }
+        } catch (Exception e) {
+            logger.error("get role error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
+    }
+
+    @Override
     public ResponseData updateUserInfo(String field, String value, String userId) {
         ResponseData response = new ResponseData();
         try {

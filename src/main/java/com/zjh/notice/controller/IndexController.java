@@ -49,6 +49,13 @@ public class IndexController {
         return response;
     }
 
+    @RequestMapping("getRole")
+    public ResponseData getRole(long userId){
+        ResponseData response;
+        response = indexService.getRole(userId);
+        return response;
+    }
+
     @RequestMapping("updateUserInfo")
     public ResponseData updateUserInfo(String field, String value, String userId){
         ResponseData response;

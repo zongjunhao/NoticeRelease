@@ -1,6 +1,7 @@
 package com.zjh.notice.service;
 
 import com.zjh.notice.kit.ResponseData;
+import com.zjh.notice.model.RUserUnit;
 import com.zjh.notice.model.User;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -29,6 +30,14 @@ public interface IndexService {
      * @return 用户信息
      */
     ResponseData getUser(String userId);
+
+    /**
+     * 查询用户角色权限
+     *
+     * @param userId 用户ID
+     * @return 掌管单位记录
+     */
+    ResponseData getRole(long userId);
 
     /**
      * 根据字段更新用户信息

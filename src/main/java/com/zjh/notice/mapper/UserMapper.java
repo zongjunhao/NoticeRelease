@@ -33,6 +33,15 @@ public interface UserMapper {
     List<RUserUnit> findUserByRole(long userId);
 
     /**
+     * 查询用户掌管单位
+     *
+     * @param userId 用户ID
+     * @return 掌管单位记录
+     */
+    @Select("select * from r_user_unit where r_user_id = #{userId} and r_role = 1")
+    List<RUserUnit> findChargeUnits(long userId);
+
+    /**
      * 根据ID查询用户
      *
      * @param userId 用户ID

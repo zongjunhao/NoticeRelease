@@ -6,6 +6,7 @@ $('#welcome-text').html('欢迎您，' + $.cookie('userName'));
 showUnit();
 showLabels();
 showReception();
+getRole();
 $(document).ready(function () {
     $('.selectpicker').selectpicker({});
 });
@@ -61,6 +62,29 @@ function showLabels() {
             });
         }
     })
+}
+
+function getRole() {
+    $.ajax({
+        url: "/index/getRole",
+        data: {
+            userId: $.cookie('userId')
+        },
+        async: true,
+        type: "POST",
+        // contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        success: function (re) {
+            if (re.code === "2007") {
+                $("#label-nav").hide()
+                $("#user-manage-nav").hide()
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            layer.msg('操作失败 ', {
+                time: 1000
+            });
+        }
+    });
 }
 
 //受理人显示，从之前的传多个自己选变为传过来一个默认的显示
@@ -157,8 +181,9 @@ function submit() {
                     layer.msg('通知发布成功', {
                         time: 2000
                     });
-
-
+                    setTimeout(function () {
+                        location.href = "/user.html"
+                    },1000)
                 } else {
                     layer.msg(re.desc, {
                         time: 1000

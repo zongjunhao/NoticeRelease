@@ -1,12 +1,36 @@
 $('#welcome-text').html('欢迎您，' + $.cookie('userName'));
+getRole();
 showUser();
+
+function getRole() {
+    $.ajax({
+        url: "/index/getRole",
+        data: {
+            userId: $.cookie('userId')
+        },
+        async: true,
+        type: "POST",
+        // contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        success: function (re) {
+            if (re.code === "2007") {
+                $("#label-nav").hide()
+                $("#user-manage-nav").hide()
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            layer.msg('操作失败 ', {
+                time: 1000
+            });
+        }
+    });
+}
 
 function showUser() {
     $.ajax({
         type: "POST",
         url: "/index/getUser",
         data: {
-            userId: "1"
+            userId: $.cookie('userId')
             // userId: $.cookie('userId')
         },
         success: function (json) {

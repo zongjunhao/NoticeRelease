@@ -40,6 +40,6 @@
         <if test='level!=0'>
             and notice_level = #{level}
         </if>
-        and notice_endtime &lt; now() ORDER BY notice_endtime
+        and notice_endtime &lt; now() ORDER BY notice_endtime desc
     </select>
 </mapper>

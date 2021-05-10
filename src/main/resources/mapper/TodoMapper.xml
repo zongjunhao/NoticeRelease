@@ -21,6 +21,6 @@
             and todo_level = #{level}
         </if>
         and todo_endtime &lt; now()
-        ORDER BY todo_endtime
+        ORDER BY todo_endtime desc
     </select>
 </mapper>
