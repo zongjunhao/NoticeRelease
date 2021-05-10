@@ -12,6 +12,13 @@ public class Unit {
   private java.sql.Timestamp unitAddtime;
   private java.sql.Timestamp unitUpdatetime;
 
+  public Unit(String unitName, String unitDescribe) {
+    this.unitName = unitName;
+    this.unitDescribe = unitDescribe;
+  }
+
+  public Unit() {
+  }
 
   public long getUnitId() {
     return unitId;

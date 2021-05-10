@@ -63,7 +63,8 @@
                     <li><a href="user.html" class=""><i class="lnr lnr-home"></i> <span>用户中心</span></a></li>
                     <li><a href="notice-release.html" class=""><i class="lnr lnr-alarm"></i> <span>发布通知</span></a></li>
                     <li><a href="label-manage.html" class=""><i class="lnr lnr-bookmark"></i> <span>标签管理</span></a></li>
-                    <li><a href="user-manage.html" class="active"><i class="lnr lnr-user"></i> <span>人事管理</span></a></li>
+                    <li><a href="user-manage.html" class="active"><i class="lnr lnr-user"></i> <span>人事管理</span></a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -106,19 +107,7 @@
                         justify-content: space-between;
                     }
 
-                    .attribute_content{
-                        flex-grow: initial;
-                    }
-
-                    input[type="text"]{
-                        width: 300px;
-                    }
-
-                    .btn-primary{
-                        margin-left: 30px;
-                    }
-
-                    .change-div{
+                    .change-div {
                         height: 100px;
                         display: flex;
                         align-content: center;
@@ -127,8 +116,15 @@
                         flex-wrap: wrap;
                     }
 
-                    #password-change-confirm{
+                    #password-change-confirm {
                         margin-top: 15px;
+                    }
+
+
+                    #users {
+                        display: flex;
+                        width: 600px;
+                        flex-wrap: wrap;
                     }
                 </style>
 
@@ -140,7 +136,108 @@
                         </div>
 
                         <div class="panel-body" style="position:relative;left:10px;">
+                            <div class="form-horizontal">
+                                <!--					单位名称-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>单</div>
+                                        <div>位</div>
+                                        <div>名</div>
+                                        <div>称:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <input type="text" class="form-control" id="name" required="required"
+                                               onblur="test('name')">
+                                        <div id="msgInfo_name" class="warning_info"></div>
+                                    </div>
+                                </div>
 
+                                <!--					单位简介-->
+                                <div class="form-group form_cell">
+                                    <span class="required" style="visibility: hidden !important;">*</span>
+                                    <div class="attribute_name">
+                                        <div>单</div>
+                                        <div>位</div>
+                                        <div>简</div>
+                                        <div>介:</div>
+                                    </div>
+                                    <div class="attribute_content">
+							            <textarea cols="60" rows="10" id="describe"
+                                                  style="resize:none;width:50%;border-color:#d8d5d5;" name="describe"
+                                                  maxlength="1000"
+                                                  onblur="test('describe')"
+                                                  class="form-control"></textarea>
+                                        <div id="msgInfo_describe" class="warning_info"></div>
+                                    </div>
+
+                                </div>
+
+                                <!--					单位所有者-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>单</div>
+                                        <div>位</div>
+                                        <div>所</div>
+                                        <div>有</div>
+                                        <div>者:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <select class="selectpicker" data-live-search="true" data-size="8"
+                                                style="width:37%;border-color:#d8d5d5;color: #999999;height: 100%;font-size: 14px;"
+                                                id="unit-holder">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--					通知发布者-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>通</div>
+                                        <div>知</div>
+                                        <div>发</div>
+                                        <div>布</div>
+                                        <div>者:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <select class="selectpicker" data-live-search="true" data-size="8"
+                                                style="width:37%;border-color:#d8d5d5;color: #999999;height: 100%;font-size: 14px;"
+                                                id="notice-releasers" multiple>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--                                单位成员-->
+                                <div class="form-group form_cell">
+                                    <span class="required">*</span>
+                                    <div class="attribute_name">
+                                        <div>单</div>
+                                        <div>位</div>
+                                        <div>成</div>
+                                        <div>员:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <div id="users">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form_cell file">
+                                    <span class="required" style="visibility: hidden !important;">*</span>
+                                    <div class="attribute_name">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="attribute_content_file">
+                                        <button class="btn btn-primary submit" type="button" onclick="submit()" style="width: 370px">提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- END OVERVIEW -->
@@ -166,14 +263,14 @@
 </div>
 
 <div class="change-div" id="change-password-div" style="visibility: hidden">
-    <input id="password-change" class="form-control" type="text" placeholder="请输入密码" />
-    <input id="password-change-confirm" class="form-control" type="text" placeholder="确认密码" />
+    <input id="password-change" class="form-control" type="text" placeholder="请输入密码"/>
+    <input id="password-change-confirm" class="form-control" type="text" placeholder="确认密码"/>
 </div>
 <div class="change-div" id="change-phone-div" style="visibility: hidden">
-    <input id="phone-change" class="form-control" type="text" placeholder="请输入电话" />
+    <input id="phone-change" class="form-control" type="text" placeholder="请输入电话"/>
 </div>
 <div class="change-div" id="change-email-div" style="visibility: hidden">
-    <input id="email-change" class="form-control" type="text" placeholder="请输入邮箱" />
+    <input id="email-change" class="form-control" type="text" placeholder="请输入邮箱"/>
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->

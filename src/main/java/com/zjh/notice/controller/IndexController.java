@@ -56,12 +56,17 @@ public class IndexController {
         return response;
     }
 
+    @RequestMapping("getUsersInCharge")
+    public ResponseData getUsersInCharge(String userId){
+        ResponseData response;
+        response = indexService.getUsersInCharge(userId);
+        return response;
+    }
+
     @RequestMapping("createUnit")
-    public ResponseData createUnit(String name, String describe, Integer leaderId,  String[] userIds){
-        ResponseData response = new ResponseData();
-        for (String i : userIds){
-            System.out.println(i);
-        }
+    public ResponseData createUnit(String unitName, String unitDescribe, String unitHolderId, String noticeReleaserIds, String userIds){
+        ResponseData response;
+        response = indexService.createUnit(unitName, unitDescribe, unitHolderId, noticeReleaserIds.split(","), userIds.split(","));
         return response;
     }
 }
