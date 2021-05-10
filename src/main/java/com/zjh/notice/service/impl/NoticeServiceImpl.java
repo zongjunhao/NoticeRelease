@@ -5,7 +5,6 @@ import com.zjh.notice.kit.ResponseData;
 import com.zjh.notice.kit.ResultCodeEnum;
 import com.zjh.notice.kit.Utils;
 import com.zjh.notice.mapper.NoticeMapper;
-import com.zjh.notice.mapper.TodoMapper;
 import com.zjh.notice.model.*;
 import com.zjh.notice.service.NoticeService;
 import org.slf4j.Logger;
@@ -208,6 +207,23 @@ public class NoticeServiceImpl implements NoticeService {
             }
         } catch (Exception e) {
             logger.error("add file error", e);
+            response.setResult(ResultCodeEnum.SERVER_ERROR);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseData addLabel(String labelName) {
+        ResponseData response = new ResponseData();
+        try {
+            int result = noticeMapper.addLabel(labelName);
+            if (result == 1) {
+                response.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);
+            } else {
+                response.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
+            }
+        } catch (Exception e) {
+            logger.error("add label error", e);
             response.setResult(ResultCodeEnum.SERVER_ERROR);
         }
         return response;

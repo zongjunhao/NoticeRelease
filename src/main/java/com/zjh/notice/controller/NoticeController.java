@@ -100,4 +100,11 @@ public class NoticeController {
         response = noticeService.addFile(originalFileName, "/upload/" + newFileName);
         return response;
     }
+
+    @RequestMapping("addLabel")
+    public ResponseData addLabel(String labelName){
+        ResponseData response;
+        response = noticeService.addLabel(labelName);
+        return response;
+    }
 }

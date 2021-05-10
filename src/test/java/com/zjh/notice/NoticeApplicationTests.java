@@ -37,6 +37,11 @@ class NoticeApplicationTests {
     }
 
     @Test
+    public void addLabel(){
+        noticeMapper.addLabel("计科1702");
+    }
+
+    @Test
     public void updateUser(){
         userMapper.updateUserInfo("user_email", "1016767058@qq.com", "1");
     }

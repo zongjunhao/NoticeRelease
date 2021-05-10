@@ -158,16 +158,10 @@
 
                         <div class="panel-body" style="position:relative;left:10px;">
                             <div class="label-container">
-                                <div class="labels">
-                                    <button type="button" class="btn btn-default">学校通知</button>
-                                    <button type="button" class="btn btn-default">Default</button>
-                                    <button type="button" class="btn btn-default">Default</button>
-                                    <button type="button" class="btn btn-default">Default</button>
-                                    <button type="button" class="btn btn-default">Default</button>
-                                    <button type="button" class="btn btn-default">Default</button>
-                                    <button type="button" class="btn btn-default">Default</button>
+                                <div class="labels" id="labels">
+
                                 </div>
-                                <button type="button" class="btn btn-success"><i class="fa fa-plus-square"></i> 添加标签 </button>
+                                <button type="button" class="btn btn-success" onclick="addLabel()"><i class="fa fa-plus-square"></i> 添加标签 </button>
                             </div>
                         </div>
                     </div>
@@ -193,16 +187,10 @@
     </footer>
 </div>
 
-<div class="change-div" id="change-password-div" style="visibility: hidden">
-    <input id="password-change" class="form-control" type="text" placeholder="请输入密码"/>
-    <input id="password-change-confirm" class="form-control" type="text" placeholder="确认密码"/>
-</div>
 <div class="change-div" id="change-phone-div" style="visibility: hidden">
-    <input id="phone-change" class="form-control" type="text" placeholder="请输入电话"/>
+    <input id="label-add" class="form-control" type="text" placeholder="请输入标签名"/>
 </div>
-<div class="change-div" id="change-email-div" style="visibility: hidden">
-    <input id="email-change" class="form-control" type="text" placeholder="请输入邮箱"/>
-</div>
+
 <!-- END WRAPPER -->
 <!-- Javascript -->
 <table id="projectHanding" style="display:none"></table>
@@ -220,7 +208,7 @@
 
     <div id="js-loader">
         <script src="assets/plugins/webuploader-0.1.5/webuploader.js"></script>
-        <script type="text/javascript" src="js/user.js"></script>
+        <script type="text/javascript" src="js/label-manage.js"></script>
         <script type="text/javascript" src="assets/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
         <script type="text/javascript" src="assets/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"
                 charset="UTF-8"></script>

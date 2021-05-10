@@ -1,6 +1,7 @@
 package com.zjh.notice.service;
 
 import com.zjh.notice.kit.ResponseData;
+import org.apache.ibatis.annotations.Insert;
 
 /**
  * @author zongjunhao
@@ -71,4 +72,11 @@ public interface NoticeService {
      * @return 是否添加成功
      */
     ResponseData addFile(String fileName, String filePath);
+
+    /**
+     * 添加标签
+     * @param labelName 标签名
+     * @return 是否添加成功
+     */
+    ResponseData addLabel(String labelName);
 }

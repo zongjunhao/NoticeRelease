@@ -169,4 +169,12 @@ public interface NoticeMapper {
      */
     @Update("update file set file_notice_id = #{noticeId} where file_id = #{fileId}")
     int updateFile(long noticeId, String fileId);
+
+    /**
+     * 添加标签
+     * @param labelName 标签名
+     * @return 是否添加成功
+     */
+    @Insert("insert into label(label_name) values (#{labelName} )")
+    int addLabel(String labelName);
 }
