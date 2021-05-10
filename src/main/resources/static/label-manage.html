@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>校园通知发布系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="assets/plugins/bootstrap-select-1.13.0-dev/dist/css/bootstrap-select.css">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
+    <link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
+    <link rel="stylesheet" href="assets/plugins/DataTables/css/jquery.dataTables.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png">
+    <!--layer css-->
+    <link rel="stylesheet" href="assets/plugins/layer/layui.css">
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand" style="padding: 13px 39px;">
+            <a href="index.html"><img src="./assets/img/logo.png" alt="Klorofil Logo"
+                                      class="img-responsive logo" style="width: 57px;display: inline;">
+                <span style="display: inline;margin-left: 16px;font-size: 20px;font-weight: bold;">校园通知发布系统</span></a>
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+            <div class="navbar-left">
+                <span class="welcome-text" id="welcome-text">欢迎您，xxx</span>
+            </div>
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="javascript:exit();"> <span>退出</span> <i class="fa fa-sign-out"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li><a href="user.html" class=""><i class="lnr lnr-home"></i> <span>用户中心</span></a></li>
+                    <li><a href="notice-release.html" class=""><i class="lnr lnr-alarm"></i> <span>发布通知</span></a></li>
+                    <li><a href="label-manage.html" class="active"><i class="lnr lnr-bookmark"></i>
+                        <span>标签管理</span></a></li>
+                    <li><a href="user-manage.html" class=""><i class="lnr lnr-user"></i> <span>人事管理</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content" id="contain-holder">
+            <!-- 内容区在此 -->
+
+            <div id="contain-loader">
+                <link rel="stylesheet" href="assets/plugins/webuploader-0.1.5/webuploader.css">
+                <link rel="stylesheet" href="assets/css/upload.css">
+                <link rel="stylesheet" href="assets/plugins/datepicker/css/bootstrap-datepicker3.min.css">
+
+                <style>
+                    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+                        width: 302px;
+                    }
+
+                    .webuploader-pick {
+                        background-color: #5cb85c;
+                        border-color: #4cae4c;
+                        color: #FFF;
+                    }
+
+                    .webuploader-pick-hover {
+                        background-color: #47a447;
+                        border-color: #398439;
+                    }
+
+                    .attribute_name {
+                        font-weight: 700;
+                        padding-right: 15px;
+                        padding-left: 5px;
+                        color: #666666;
+                        width: 12%;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                    .attribute_content {
+                        flex-grow: initial;
+                    }
+
+                    input[type="text"] {
+                        width: 300px;
+                    }
+
+                    .btn-primary {
+                        margin-left: 30px;
+                    }
+
+                    .change-div {
+                        height: 100px;
+                        display: flex;
+                        align-content: center;
+                        align-items: center;
+                        margin-left: 15px;
+                        flex-wrap: wrap;
+                    }
+
+                    #password-change-confirm {
+                        margin-top: 15px;
+                    }
+
+                    .label-container{
+                        display: flex;
+                    }
+                    .labels{
+                        width: 500px;
+                        display: flex;
+                        flex-wrap: wrap;
+                    }
+                    .btn{
+                        margin: 10px;
+                    }
+                    .btn-success{
+                        height: fit-content;
+                        margin-left: 20px;
+                    }
+                </style>
+
+                <div class="container-fluid">
+                    <!-- OVERVIEW -->
+                    <div class="panel panel-headline">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">标签管理</h3>
+                        </div>
+
+                        <div class="panel-body" style="position:relative;left:10px;">
+                            <div class="label-container">
+                                <div class="labels">
+                                    <button type="button" class="btn btn-default">学校通知</button>
+                                    <button type="button" class="btn btn-default">Default</button>
+                                    <button type="button" class="btn btn-default">Default</button>
+                                    <button type="button" class="btn btn-default">Default</button>
+                                    <button type="button" class="btn btn-default">Default</button>
+                                    <button type="button" class="btn btn-default">Default</button>
+                                    <button type="button" class="btn btn-default">Default</button>
+                                </div>
+                                <button type="button" class="btn btn-success"><i class="fa fa-plus-square"></i> 添加标签 </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OVERVIEW -->
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy; 2021 校园通知发布系统</p>
+        </div>
+    </footer>
+</div>
+
+<div class="change-div" id="change-password-div" style="visibility: hidden">
+    <input id="password-change" class="form-control" type="text" placeholder="请输入密码"/>
+    <input id="password-change-confirm" class="form-control" type="text" placeholder="确认密码"/>
+</div>
+<div class="change-div" id="change-phone-div" style="visibility: hidden">
+    <input id="phone-change" class="form-control" type="text" placeholder="请输入电话"/>
+</div>
+<div class="change-div" id="change-email-div" style="visibility: hidden">
+    <input id="email-change" class="form-control" type="text" placeholder="请输入邮箱"/>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<table id="projectHanding" style="display:none"></table>
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-select-1.13.0-dev/dist/js/bootstrap-select.js"></script>
+<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/plugins/DataTables/js/jquery.dataTables.js"></script>
+<script src="assets/scripts/klorofil-common.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/cookie/jquery.cookie.js"></script>
+<script src="js/global.js"></script>
+<div id="js-holder">
+    <!-- js区在此 -->
+
+    <div id="js-loader">
+        <script src="assets/plugins/webuploader-0.1.5/webuploader.js"></script>
+        <script type="text/javascript" src="js/user.js"></script>
+        <script type="text/javascript" src="assets/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="assets/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"
+                charset="UTF-8"></script>
+        <script type="text/javascript">
+            $('#data-picker input').datepicker({
+                language: 'zh-CN',
+                format: 'yyyy-mm-dd',//日期格式
+            });
+            $('#data-picker input').datepicker('setDate', new Date());
+        </script>
+    </div>
+</div>
+</body>
+</html>

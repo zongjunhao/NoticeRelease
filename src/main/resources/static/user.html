@@ -60,8 +60,8 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="user.html" class=""><i class="lnr lnr-home"></i> <span>用户中心</span></a></li>
-                    <li><a href="notice-release.html" class="active"><i class="lnr lnr-alarm"></i> <span>发布通知</span></a></li>
+                    <li><a href="user.html" class="active"><i class="lnr lnr-home"></i> <span>用户中心</span></a></li>
+                    <li><a href="notice-release.html" class=""><i class="lnr lnr-alarm"></i> <span>发布通知</span></a></li>
                     <li><a href="label-manage.html" class=""><i class="lnr lnr-bookmark"></i> <span>标签管理</span></a></li>
                     <li><a href="user-manage.html" class=""><i class="lnr lnr-user"></i> <span>人事管理</span></a></li>
                 </ul>
@@ -106,159 +106,132 @@
                         justify-content: space-between;
                     }
 
+                    .attribute_content{
+                        flex-grow: initial;
+                    }
+
+                    input[type="text"]{
+                        width: 300px;
+                    }
+
+                    .btn-primary{
+                        margin-left: 30px;
+                    }
+
+                    .change-div{
+                        height: 100px;
+                        display: flex;
+                        align-content: center;
+                        align-items: center;
+                        margin-left: 15px;
+                        flex-wrap: wrap;
+                    }
+
+                    #password-change-confirm{
+                        margin-top: 15px;
+                    }
                 </style>
 
                 <div class="container-fluid">
                     <!-- OVERVIEW -->
                     <div class="panel panel-headline">
                         <div class="panel-heading">
-                            <h3 class="panel-title">发布通知</h3>
+                            <h3 class="panel-title">用户中心</h3>
                         </div>
 
                         <div class="panel-body" style="position:relative;left:10px;">
                             <div class="form-horizontal">
-                                <!--					通知单位-->
+
+                                <!--					姓名-->
                                 <div class="form-group form_cell">
-                                    <span class="required">*</span>
+                                    <span class="required" style="visibility: hidden !important;">*</span>
                                     <div class="attribute_name">
-                                        <div>通</div>
-                                        <div>知</div>
-                                        <div>发</div>
-                                        <div>布</div>
-                                        <div>单</div>
-                                        <div>位:</div>
+                                        <div>姓</div>
+                                        <div>名:</div>
                                     </div>
                                     <div class="attribute_content">
-                                        <select class="selectpicker" data-live-search="true" data-size="8"
-                                                style="width:37%;border-color:#d8d5d5;color: #999999;height: 100%;font-size: 14px;"
-                                                id="unit">
-                                        </select>
+                                        <input type="text" class="form-control" id="name" required="required" disabled>
                                     </div>
                                 </div>
 
-                                <!--					通知标题-->
+                                <!--					性别-->
                                 <div class="form-group form_cell">
-                                    <span class="required">*</span>
+                                    <span class="required" style="visibility: hidden !important;">*</span>
                                     <div class="attribute_name">
-                                        <div>通</div>
-                                        <div>知</div>
-                                        <div>标</div>
-                                        <div>题:</div>
-                                    </div>
-                                    <div class="attribute_content">
-                                        <input type="text" class="form-control" id="title" required="required"
-                                               onblur="test('title')">
-                                        <div id="msgInfo_title" class="warning_info"></div>
-                                    </div>
-                                </div>
-
-                                <!--					通知内容-->
-                                <div class="form-group form_cell">
-                                    <span class="required">*</span>
-                                    <div class="attribute_name">
-                                        <div>通</div>
-                                        <div>知</div>
-                                        <div>内</div>
-                                        <div>容:</div>
-                                    </div>
-                                    <div class="attribute_content">
-							            <textarea cols="60" rows="10" id="content"
-                                                  style="resize:none;width:50%;border-color:#d8d5d5;" name="content"
-                                                  maxlength="1000"
-                                                  onblur="test('content')"
-                                                  class="form-control"></textarea>
-                                        <div id="msgInfo_content" class="warning_info"></div>
-                                    </div>
-
-                                </div>
-
-                                <!--					通知级别-->
-                                <div class="form-group form_cell">
-                                    <span class="required">*</span>
-                                    <div class="attribute_name">
-                                        <div>通</div>
-                                        <div>知</div>
-                                        <div>级</div>
+                                        <div>性</div>
                                         <div>别:</div>
                                     </div>
                                     <div class="attribute_content">
-                                        <select class="selectpicker" id="level">
-                                            <option value="3">一般</option>
-                                            <option value="2">重要</option>
-                                            <option value="1">紧急</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="gender" required="required"
+                                               disabled>
                                     </div>
                                 </div>
 
-                                <!--					截止时间-->
-                                <div class="form-group form_cell">
-                                    <span class="required">*</span>
-                                    <div class="attribute_name">
-                                        <div>截</div>
-                                        <div>止</div>
-                                        <div>日</div>
-                                        <div>期:</div>
-                                    </div>
-                                    <div id="data-picker">
-                                        <div class="input-group date">
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-addon"><i
-                                                    class="glyphicon glyphicon-th"></i> </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--					通知标签-->
+                                <!--					学工号-->
                                 <div class="form-group form_cell">
                                     <span class="required" style="visibility: hidden !important;">*</span>
                                     <div class="attribute_name">
-                                        <div>通</div>
-                                        <div>知</div>
-                                        <div>标</div>
-                                        <div>签:</div>
+                                        <div>学</div>
+                                        <div>工</div>
+                                        <div>号:</div>
                                     </div>
                                     <div class="attribute_content">
-                                        <div id="label"></div>
-                                        <!--                                        <label><input type='checkbox' name='check' id="1"/>学校通知</label>-->
-                                        <!--                                        &nbsp;-->
-                                        <!--                                        <label><input type='checkbox' name='check' id="2"/>学院通知</label>-->
-                                        <!--                                        &nbsp;-->
-                                        <!--                                        <label><input type='checkbox' name='check' id="3"/>课程</label>-->
-                                        <!--                                        &nbsp;-->
-                                        <!--                                        <label><input type='checkbox' name='check' id="4"/>活动</label>-->
-                                        <!--                                        &nbsp;-->
-                                        <!--                                        <label><input type='checkbox' name='check' id="5"/>比赛</label>-->
+                                        <input type="text" class="form-control" id="account" required="required"
+                                               disabled>
                                     </div>
                                 </div>
 
-                                <!--					附件-->
-                                <div class="form-group form_cell file">
+                                <!--					密码-->
+                                <div class="form-group form_cell">
                                     <span class="required" style="visibility: hidden !important;">*</span>
-                                    <div class="attribute_name" style="padding-top: 4px;">
-                                        <div>上</div>
-                                        <div>传</div>
-                                        <div>附</div>
-                                        <div>件:</div>
+                                    <div class="attribute_name">
+                                        <div>密</div>
+                                        <div>码:</div>
                                     </div>
-                                    <div class="attribute_content_file">
-                                        <div id="uploader" class="wu-example" style="padding: 0;">
-                                            <!--用来存放文件信息-->
-                                            <div id="uploader_file">
-                                            </div>
-                                            <div class="btns">
-                                                <div id="picker">选择文件</div>
-                                                <button type="button" id="ctlBtn" class="btn btn-primary"
-                                                        style="height: 33px;margin-left: 20px">开始上传
-                                                </button>
-                                            </div>
-                                            <span style="display:none" id="paper_file_loaction"></span>
-                                        </div>
-                                        <div class="panel-subtitle" style="padding-top: 0;">
-                                            上传文件类型限制为：jpg,png,pdf,doc,docx,zip,rar。单个文件最大容量是：100M
-                                        </div>
-                                        <button class="btn btn-primary submit" type="button" onclick="submit()">提交
-                                        </button>
+                                    <div class="attribute_content">
+                                        <input type="text" class="form-control" id="password" required="required"
+                                               disabled>
                                     </div>
+                                    <button class="btn btn-primary btn-sm" type="button" id='changePassword'
+                                            style="display:inline;"
+                                            onclick="changePassword()"> 修改
+                                    </button>
+                                </div>
+
+                                <!--					联系电话-->
+                                <div class="form-group form_cell">
+                                    <span class="required" style="visibility: hidden !important;">*</span>
+                                    <div class="attribute_name">
+                                        <div>联</div>
+                                        <div>系</div>
+                                        <div>电</div>
+                                        <div>话:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <input type="text" class="form-control" id="phone" required="required" disabled>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm" type="button" id='changePhone'
+                                            style="display:inline;"
+                                            onclick="changePhone()"> 修改
+                                    </button>
+                                </div>
+
+                                <!--					邮箱-->
+                                <div class="form-group form_cell">
+                                    <span class="required" style="visibility: hidden !important;">*</span>
+                                    <div class="attribute_name">
+                                        <div>电</div>
+                                        <div>子</div>
+                                        <div>邮</div>
+                                        <div>箱:</div>
+                                    </div>
+                                    <div class="attribute_content">
+                                        <input type="text" class="form-control" id="mail" required="required" disabled>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm" type="button" id='changeMail'
+                                            style="display:inline;"
+                                            onclick="changeMail()"> 修改
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -284,6 +257,17 @@
         </div>
     </footer>
 </div>
+
+<div class="change-div" id="change-password-div" style="visibility: hidden">
+    <input id="password-change" class="form-control" type="text" placeholder="请输入密码" />
+    <input id="password-change-confirm" class="form-control" type="text" placeholder="确认密码" />
+</div>
+<div class="change-div" id="change-phone-div" style="visibility: hidden">
+    <input id="phone-change" class="form-control" type="text" placeholder="请输入电话" />
+</div>
+<div class="change-div" id="change-email-div" style="visibility: hidden">
+    <input id="email-change" class="form-control" type="text" placeholder="请输入邮箱" />
+</div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
 <table id="projectHanding" style="display:none"></table>
@@ -301,7 +285,7 @@
 
     <div id="js-loader">
         <script src="assets/plugins/webuploader-0.1.5/webuploader.js"></script>
-        <script type="text/javascript" src="js/notice-release.js"></script>
+        <script type="text/javascript" src="js/user.js"></script>
         <script type="text/javascript" src="assets/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
         <script type="text/javascript" src="assets/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"
                 charset="UTF-8"></script>
